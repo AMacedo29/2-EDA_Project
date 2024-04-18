@@ -1,9 +1,19 @@
 #include <iostream>
-#include <aeroporto.h>
-#include <utils.h>
+#include "aeroporto.h"
+#include "utils.h"
 using namespace std;
 
 int main(){
+    srand(time(nullptr)); // Deve ser chamada apenas uma vez no início do programa por isso fica aqui
+
+
+    for (int i = 0; i < 5; ++i) {
+        std::string bilhete = gerarBilheteAleatorio();
+        std::cout << "Numero de Bilhete: " << bilhete << std::endl;
+    }
+
+
+    /*
 
     aeroportoMenu();
 
@@ -31,6 +41,8 @@ int main(){
 
     string voo = getRandomVoo();
     cout << "Voo aleatorio: " << voo << endl;
+
+     */
 
     return 0;
 }

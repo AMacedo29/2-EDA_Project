@@ -17,6 +17,24 @@ int randomNumber(int minVal, int maxVal) {
     return minVal + (rand() % (maxVal + 1 - minVal));
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Função para gerar um número de bilhete aleatório no formato TKXXXXXXX
+ *
+ * @return Bilhete "Aleatorio".
+ */
+    std::string gerarBilheteAleatorio(){
+    int numeroAleatorio = randomNumber(1000000, 9999999); // Gera um número entre 1000000 e 9999999
+    return "TK" + std::to_string(numeroAleatorio); // Converte o número aleatório para string e finaliza o bilhete
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
 /**
  *
  * @return um destino lido aleatoriamente do arquivo "destino.txt".

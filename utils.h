@@ -6,6 +6,8 @@ using namespace std;
 
 int randomNumber(int min, int max);
 
+std::string gerarBilheteAleatorio();
+
 string getRandomDestino();
 
 string getRandomModelo();
