@@ -6,7 +6,7 @@
 using namespace std;
 
 struct Passageiro{
-    int numeroDoBilhete; //TK1000000
+    string numeroDoBilhete; //TK1000000
     string primeiroNome;
     string segundoNome;
     string nacionalidade;

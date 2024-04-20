@@ -18,5 +18,10 @@ struct Aviao{
     Passageiro* proximoPassageiro; //Ponteiro para o prixmo passageiro da lista liaga
 };
 
+void adicionarAviao(Aviao*& lista, Aviao* novoAviao);
+
+void imprimirAvioes(Aviao* lista);
+
+Aviao* gerarAviaoAleatorio();
 
 #endif //INC_2_EDA_PROJECT_AVIAO_H

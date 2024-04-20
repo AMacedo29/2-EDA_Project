@@ -1,19 +1,27 @@
 #include <iostream>
 #include "aeroporto.h"
 #include "utils.h"
+#include "aviao.h"
+
 using namespace std;
 
 int main(){
     srand(time(nullptr)); // Deve ser chamada apenas uma vez no início do programa por isso fica aqui
 
+    Aviao* listaAvioes = nullptr; // A lista começa vazia
 
+    for (int i = 0; i < 5; ++i) {
+        Aviao* aviaoAleatorio = gerarAviaoAleatorio();
+        adicionarAviao(listaAvioes, aviaoAleatorio);
+    }
+
+    imprimirAvioes(listaAvioes); // Imprime os aviões da lista ligada
+
+/*
     for (int i = 0; i < 5; ++i) {
         std::string bilhete = gerarBilheteAleatorio();
         std::cout << "Numero de Bilhete: " << bilhete << std::endl;
     }
-
-
-    /*
 
     aeroportoMenu();
 
