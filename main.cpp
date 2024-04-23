@@ -5,6 +5,11 @@
 
 using namespace std;
 
+/*
+Grupo 24: Tiago-2127121, João Silva-2187423, André-Macedo 2076023 ;
+*/
+
+
 int main(){
     srand(time(nullptr)); // Deve ser chamada apenas uma vez no início do programa por isso fica aqui
 
