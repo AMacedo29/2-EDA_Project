@@ -3,6 +3,10 @@
 
 
 void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
+    // Verificar se a lista de aproximação não é nula
+    if (*ListaAprox == nullptr) {
+        return; // Não há nada a ser movido
+    }
     // Encontrar o último elemento da lista de aprox
     Aviao* anterior = nullptr;
     Aviao* atual = *ListaAprox;
