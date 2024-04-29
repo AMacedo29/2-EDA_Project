@@ -4,7 +4,6 @@
 #include <string>
 #include "passageiros.h"
 
-using namespace std;
 
 
 struct Aviao{
@@ -18,10 +17,10 @@ struct Aviao{
     Passageiro* proximoPassageiro; //Ponteiro para o prixmo passageiro da lista liaga
 };
 
-void adicionarAviao(Aviao*& lista, Aviao* novoAviao);
 
-void imprimirAvioes(Aviao* lista);
+Aviao* novoAviao();
 
-Aviao* gerarAviaoAleatorio();
+Aviao* inserirAviaoAprox(Aviao** aNodo, Aviao* &ListaAprox);
+
 
 #endif //INC_2_EDA_PROJECT_AVIAO_H

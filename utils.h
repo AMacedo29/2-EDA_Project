@@ -2,24 +2,22 @@
 #define INC_2_EDA_PROJECT_UTILS_H
 #include <string>
 
-using namespace std;
-
 int randomNumber(int min, int max);
 
 std::string gerarBilheteAleatorio();
 
-string getRandomDestino();
+std::string getRandomDestino();
 
-string getRandomModelo();
+std::string getRandomModelo();
 
-string getRandomNacionalidade();
+std::string getRandomNacionalidade();
 
-string getRandomOrigem();
+std::string getRandomOrigem();
 
-string getRandomPrimeiroNome();
+std::string getRandomPrimeiroNome();
 
-string getRandomSegundoNome();
+std::string getRandomSegundoNome();
 
-string getRandomVoo();
+std::string getRandomVoo();
 
 #endif //INC_2_EDA_PROJECT_UTILS_H

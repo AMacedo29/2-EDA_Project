@@ -3,8 +3,6 @@
 #include <fstream> // Para ler ficheiros
 #include <string>
 
-using namespace std;
-
 
 /**
 * calcula um numero inteiro aleatorio dentro do intervalo especificado
@@ -39,9 +37,9 @@ int randomNumber(int minVal, int maxVal) {
  *
  * @return um destino lido aleatoriamente do arquivo "destino.txt".
  */
-string getRandomDestino() {
-    ifstream myFile("files/destino.txt"); // Abre o arquivo "destino.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomDestino() {
+    std::ifstream myFile("files/destino.txt"); // Abre o arquivo "destino.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -70,9 +68,9 @@ string getRandomDestino() {
  *
  * @return um modelo lido aleatoriamente do arquivo "modelo.txt".
  */
-string getRandomModelo() {
-    ifstream myFile("files/modelo.txt"); // Abre o arquivo "modelo.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomModelo() {
+    std::ifstream myFile("files/modelo.txt"); // Abre o arquivo "modelo.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -101,9 +99,9 @@ string getRandomModelo() {
  *
  * @return uma nacionalidade lido aleatoriamente do arquivo "nacionalidade.txt".
  */
-string getRandomNacionalidade() {
-    ifstream myFile("files/nacionalidade.txt"); // Abre o arquivo "nacionalidade.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomNacionalidade() {
+    std::ifstream myFile("files/nacionalidade.txt"); // Abre o arquivo "nacionalidade.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -132,9 +130,9 @@ string getRandomNacionalidade() {
  *
  * @return uma origem lido aleatoriamente do arquivo "origem.txt".
  */
-string getRandomOrigem() {
-    ifstream myFile("files/origem.txt"); // Abre o arquivo "origem.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomOrigem() {
+    std::ifstream myFile("files/origem.txt"); // Abre o arquivo "origem.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -163,9 +161,9 @@ string getRandomOrigem() {
  *
  * @return um primeiro nome lido aleatoriamente do arquivo "primeiro_nome.txt".
  */
-string getRandomPrimeiroNome() {
-    ifstream myFile("files/primeiro_nome.txt"); // Abre o arquivo "primeiro_nome.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomPrimeiroNome() {
+    std::ifstream myFile("files/primeiro_nome.txt"); // Abre o arquivo "primeiro_nome.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -194,9 +192,9 @@ string getRandomPrimeiroNome() {
  *
  * @return um segundo nome lido aleatoriamente do arquivo "segundo_nome.txt".
  */
-string getRandomSegundoNome() {
-    ifstream myFile("files/segundo_nome.txt"); // Abre o arquivo "segundo_nome.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomSegundoNome() {
+    std::ifstream myFile("files/segundo_nome.txt"); // Abre o arquivo "segundo_nome.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
@@ -224,9 +222,9 @@ string getRandomSegundoNome() {
  *
  * @return um voo  lido aleatoriamente do arquivo "voo.txt".
  */
-string getRandomVoo() {
-    ifstream myFile("files/voo.txt"); // Abre o arquivo "voo.txt"
-    string linha; // Variável temporária para armazenar cada linha do arquivo
+std::string getRandomVoo() {
+    std::ifstream myFile("files/voo.txt"); // Abre o arquivo "voo.txt"
+    std::string linha; // Variável temporária para armazenar cada linha do arquivo
     int numeroDeLinhas = 0;
 
     // Conta o número de linhas
