@@ -3,9 +3,10 @@
 #include "aviao.h"
 
 void aeroportoMenu();
-void imprimirListaAprox();
+void imprimirListaAprox(Aviao* ListaAprox);
 void imprimirListaPista(Aviao* listaPista);
 void imprimirListaPartida();
+void addListaAprox(Aviao*& ListaAprox);
 
 
 #endif //INC_2_EDA_PROJECT_AEROPORTO_H

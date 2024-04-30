@@ -5,7 +5,7 @@
 
 // Parece q isto n me vai servir para nada
 // Esta a funcionar bem
-
+/*
 void novoPassageiro(){
     std::string numeroDoBilhete = gerarBilheteAleatorio();
     std::string primeiroNome = getRandomPrimeiroNome();
@@ -19,7 +19,7 @@ void novoPassageiro(){
     std::cout << std::endl;
 
 }
-
+*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -20,6 +20,7 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
 
     // O último elemento da lista de aprox se torna o primeiro da lista de pista
     *listaPista = *ListaAprox;
+    *listaPista = atual;
 
     // O elemento anterior ao último na lista de aprox agora aponta para NULL
     if (anterior != nullptr) {
