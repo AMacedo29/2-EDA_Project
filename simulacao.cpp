@@ -65,4 +65,23 @@ int countAvioes(Aviao* lista) {
     return count;
 }
 
+void removeUltimo(Aviao** lista) {
+    if (*lista == nullptr || (*lista)->proximoAviao == nullptr) {
+        return; // Lista vazia ou com apenas um elemento
+    }
+
+    Aviao* atual = *lista;
+    Aviao* anterior = nullptr;
+
+    // Percorre a lista até o penúltimo elemento
+    while (atual->proximoAviao != nullptr) {
+        anterior = atual;
+        atual = atual->proximoAviao;
+    }
+
+    // O último elemento é 'atual', e o penúltimo é 'anterior'
+    // Remove o último elemento ajustando o ponteiro do penúltimo para nullptr
+    anterior->proximoAviao = nullptr;
+    delete atual; // Libera a memória do último elemento
+}
 

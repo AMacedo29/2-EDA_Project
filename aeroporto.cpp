@@ -40,6 +40,7 @@ void aeroportoMenu(){
                 moverUltimoParaListaPartidas(&listaPista, &listaPartida);
             }
             imprimirListaPartida(listaPartida);
+            removeUltimo(&listaPartida);
             break;
         case 'b':
             std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
