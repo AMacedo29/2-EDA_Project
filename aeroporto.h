@@ -5,7 +5,7 @@
 void aeroportoMenu();
 void imprimirListaAprox(Aviao* ListaAprox);
 void imprimirListaPista(Aviao* listaPista);
-void imprimirListaPartida();
+void imprimirListaPartida(Aviao* listaPartida);
 void addListaAprox(Aviao*& ListaAprox);
 
 

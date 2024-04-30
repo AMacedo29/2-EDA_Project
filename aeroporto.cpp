@@ -8,16 +8,15 @@
 void aeroportoMenu(){
     Aviao* ListaAprox = nullptr;
     Aviao* listaPista = nullptr;
+    Aviao* listaPartida = nullptr;
     addListaAprox(ListaAprox);
     imprimirListaAprox(ListaAprox);
-
     char escolha;
     bool sair = false;
 
     do{
         std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte" << std::endl;
         std::cin >> escolha;
-
         //Convertendo a escolha para minusculas
         escolha = tolower(escolha);
 
@@ -33,8 +32,14 @@ void aeroportoMenu(){
             break;
         case 's':
             imprimirListaAprox(ListaAprox);
-            moverUltimoParaListaPista(&ListaAprox, &listaPista);
+            if (countAvioes(listaPista) < 7 && ListaAprox != nullptr) {
+                moverUltimoParaListaPista(&ListaAprox, &listaPista);;
+            }
             imprimirListaPista(listaPista);
+            if (countAvioes(listaPista) == 7 && ListaAprox != nullptr && countAvioes(listaPartida) < 5) {
+                moverUltimoParaListaPartidas(&listaPista, &listaPartida);
+            }
+            imprimirListaPartida(listaPartida);
             break;
         case 'b':
             std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
@@ -88,12 +93,19 @@ void imprimirListaPista(Aviao* listaPista){
         std::cout << std::endl;
         listaPista = listaPista->proximoAviao;
     }
-
 }
 
-void imprimirListaPartida(){
+void imprimirListaPartida(Aviao* listaPartida){
     std::cout << "---------------" << std::endl;
     std::cout << "A descolar" << std::endl;
     std::cout << "---------------" << std::endl;
+    while (listaPartida != nullptr) {
+        std::cout << "Voo: " << listaPartida->nomeVoo << std::endl;
+        std::cout << "Modelo: " << listaPartida->modeloAviao << std::endl;
+        std::cout << "Origem: " << listaPartida->origem << std::endl;
+        std::cout << "Destino: " << listaPartida->destino << std::endl;
+        std::cout << std::endl;
+        listaPartida = listaPartida->proximoAviao;
+    }
 
 }

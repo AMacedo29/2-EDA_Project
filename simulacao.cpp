@@ -7,6 +7,7 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
     if (*ListaAprox == nullptr) {
         return; // Não há nada a ser movido
     }
+
     // Encontrar o último elemento da lista de aprox
     Aviao* anterior = nullptr;
     Aviao* atual = *ListaAprox;
@@ -27,3 +28,41 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
         anterior->proximoAviao = nullptr;
     }
 }
+
+void moverUltimoParaListaPartidas(Aviao** listaPista, Aviao** listaPartida) {
+    // Verificar se a lista de pista não é nula
+    if (*listaPista == nullptr) {
+        return; // Não há nada a ser movido
+    }
+
+    // Encontrar o último elemento da lista de pista
+    Aviao* anterior = nullptr;
+    Aviao* atual = *listaPista;
+    while (atual->proximoAviao != nullptr) {
+        anterior = atual;
+        atual = atual->proximoAviao;
+    }
+
+    // O último elemento da lista de pista agora aponta para o primeiro da lista de partidas
+    atual->proximoAviao = *listaPartida;
+
+    // O último elemento da lista de pista se torna o primeiro da lista de partidas
+    *listaPartida = *listaPista;
+
+    // Atualizar o ponteiro para a lista de pista
+    *listaPista = anterior;
+
+    // O próximo do último elemento na lista de partidas agora é nullptr
+    atual->proximoAviao = nullptr;
+}
+
+int countAvioes(Aviao* lista) {
+    int count = 0;
+    while (lista != nullptr) {
+        count++;
+        lista = lista->proximoAviao;
+    }
+    return count;
+}
+
+
