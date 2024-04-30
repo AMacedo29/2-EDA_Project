@@ -3,7 +3,7 @@
 #include "aviao.h"
 #include "utils.h"
 #include "simulacao.h"
-
+#include "gravar.h"
 
 void aeroportoMenu(){
     Aviao* ListaAprox = nullptr;
@@ -28,7 +28,8 @@ void aeroportoMenu(){
             std::cout << "ainda n tem nada " << std::endl;
             break;
         case 'g':
-            std::cout << "ainda n tem nada " << std::endl;
+            gravarListaAprox(ListaAprox, "gravarListaAprox.txt");
+            std::cout << "está no cmake-build-debug " << std::endl;
             break;
         case 's':
             imprimirListaAprox(ListaAprox);

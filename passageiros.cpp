@@ -7,7 +7,7 @@
 
 // Parece q isto n me vai servir para nada
 // Esta a funcionar bem
-/*
+
 void novoPassageiro(){
     std::string numeroDoBilhete = gerarBilheteAleatorio();
     std::string primeiroNome = getRandomPrimeiroNome();
@@ -21,7 +21,7 @@ void novoPassageiro(){
     std::cout << std::endl;
 
 }
-*/
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ void novoPassageiro(){
 
 // N sei o que se passa mas fiz isto mal (ele esta a implicar com a estrutura no aviao.h)
 
-/*
+
 
 // Função para contar o número de passageiros a bordo do avião
 int contarPassageiros(Aviao* aviao) {
@@ -44,14 +44,14 @@ int contarPassageiros(Aviao* aviao) {
     return numeroDePassagerios;
 }
 
-*/
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // N sei o que se passa mas fiz isto mal (ele esta a implicar com a estrutura no aviao.h)
 
 
-/*
+
 void adicionarPassageiro(Aviao* aviao) {
     // Verifica se o número de passageiros já atingiu a capacidade máxima do avião
     if (contarPassageiros(aviao) >= aviao->capacidade) {
@@ -87,4 +87,4 @@ void adicionarPassageiro(Aviao* aviao) {
     std::cout << std::endl;
 }
 
-*/
+
