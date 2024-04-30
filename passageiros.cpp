@@ -1,3 +1,5 @@
+#include <iostream>
+#include "string"
 #include "passageiros.h"
 #include "utils.h"
 #include "aviao.h"
@@ -48,9 +50,9 @@ int contarPassageiros(Aviao* aviao) {
 
 // N sei o que se passa mas fiz isto mal (ele esta a implicar com a estrutura no aviao.h)
 
-/*
 
-void adicionarPassageiro(Aviao* aviao, const std::string& nacionalidade) {
+/*
+void adicionarPassageiro(Aviao* aviao) {
     // Verifica se o número de passageiros já atingiu a capacidade máxima do avião
     if (contarPassageiros(aviao) >= aviao->capacidade) {
         std::cout << "O avião já atingiu a capacidade máxima de passageiros." << std::endl;
@@ -85,4 +87,4 @@ void adicionarPassageiro(Aviao* aviao, const std::string& nacionalidade) {
     std::cout << std::endl;
 }
 
- */
+*/
