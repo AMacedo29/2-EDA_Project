@@ -28,8 +28,10 @@ void aeroportoMenu(){
             std::cout << "ainda n tem nada " << std::endl;
             break;
         case 'g':
-            gravarListaAprox(ListaAprox, "gravarListaAprox.txt");
-            std::cout << "está no cmake-build-debug " << std::endl;
+            gravarListaAprox(ListaAprox, "listaAprox.txt");
+            gravarListaPista(listaPista, "listaPista.txt");
+            gravarListaPartida(listaPartida, "listaPartida.txt");
+            std::cout << "Listas gravadas com sucesso!" << std::endl;
             break;
         case 's':
             imprimirListaAprox(ListaAprox);
