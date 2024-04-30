@@ -34,16 +34,21 @@ void aeroportoMenu(){
             std::cout << "Listas gravadas com sucesso!" << std::endl;
             break;
         case 's':
+            if (countAvioes(ListaAprox) < 10){
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox);
+            }
             imprimirListaAprox(ListaAprox);
             if (countAvioes(listaPista) < 7 && ListaAprox != nullptr) {
                 moverUltimoParaListaPista(&ListaAprox, &listaPista);;
             }
             imprimirListaPista(listaPista);
-            if (countAvioes(listaPista) == 7 && ListaAprox != nullptr && countAvioes(listaPartida) < 5) {
+            if (countAvioes(listaPartida) < 5 && countAvioes(listaPista) >= 7 && ListaAprox != nullptr ) {
                 moverUltimoParaListaPartidas(&listaPista, &listaPartida);
             }
             imprimirListaPartida(listaPartida);
-            removeUltimo(&listaPartida);
+            if (countAvioes(listaPista) > 5){
+                removeUltimo(&listaPartida);
+            }
             break;
         case 'b':
             std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
@@ -60,7 +65,6 @@ void aeroportoMenu(){
 
 void addListaAprox(Aviao*& ListaAprox){
     srand(time(nullptr));
-    // Inserir 10 aviões na lista de aproximação apenas se ela estiver vazia
     if (ListaAprox == nullptr) {
         for (int i = 0; i < 10; ++i) {
             ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox);
