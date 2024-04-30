@@ -11,6 +11,7 @@ Aviao* novoAviao(){
     elemento->origem = getRandomOrigem();
     elemento->destino = getRandomDestino();
     elemento->capacidade = randomNumber(5,15);
+    elemento->proximoPassageiro = nullptr;
 
     return elemento;
 }
