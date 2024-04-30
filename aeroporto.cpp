@@ -4,6 +4,8 @@
 #include "utils.h"
 #include "simulacao.h"
 #include "gravar.h"
+#include "carregar.h"
+
 
 void aeroportoMenu(){
     Aviao* ListaAprox = nullptr;
@@ -25,7 +27,17 @@ void aeroportoMenu(){
             std::cout <<" ainda n tem nada " << std::endl;
             break;
         case 'o':
-            std::cout << "ainda n tem nada " << std::endl;
+            /*
+            limparListaAvioes(ListaAprox);
+            limparListaAvioes(listaPista);
+            limparListaAvioes(listaPartida);
+            carregarListaAprox(ListaAprox,"listaAprox.txt");
+            carregarListaPista(listaPista, "listaPista.txt");
+            carregarListaPartida(listaPartida, "listaPartida.txt");
+            imprimirListaPista(listaPista); // meti isto para ver se o carregar estava a dar
+            imprimirListaPartida(listaPartida);
+             */
+            std::cout << "Dados carregados com sucesso! " << std::endl; // mudar isto é temp
             break;
         case 'g':
             gravarListaAprox(ListaAprox, "listaAprox.txt");
