@@ -25,13 +25,13 @@ void novoPassageiro(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Parece estar certa depois vou documentar
 
-// N sei o que se passa mas fiz isto mal (ele esta a implicar com a estrutura no aviao.h)
-
-
-
-// Função para contar o número de passageiros a bordo do avião
+/**
+ *Função para contar o número de passageiros a bordo do avião
+ *
+ * @param aviao Ponteiro para o avião
+ * @return O número de passageiros a bordo
+ */
 int contarPassageiros(Aviao* aviao) {
     int numeroDePassagerios = 0;
     Passageiro* passageiroAtual = aviao->proximoPassageiro;
@@ -45,13 +45,14 @@ int contarPassageiros(Aviao* aviao) {
 }
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// N sei o que se passa mas fiz isto mal (ele esta a implicar com a estrutura no aviao.h)
 
-
-
+/**
+ *Adiciona um novo passageiro ao avião (se houver capacidade)
+ *
+ * @param aviao Ponteiro para o avião em que o passageiro será inserido
+ */
 void adicionarPassageiro(Aviao* aviao) {
     // Verifica se o número de passageiros já atingiu a capacidade máxima do avião
     if (contarPassageiros(aviao) >= aviao->capacidade) {

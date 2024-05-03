@@ -17,7 +17,7 @@ void aeroportoMenu(){
     bool sair = false;
 
     do{
-        std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte" << std::endl;
+        std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte (c)arregar" << std::endl;
         std::cin >> escolha;
         //Convertendo a escolha para minusculas
         escolha = tolower(escolha);
@@ -27,23 +27,12 @@ void aeroportoMenu(){
             std::cout <<" ainda n tem nada " << std::endl;
             break;
         case 'o':
-            /*
-            limparListaAvioes(ListaAprox);
-            limparListaAvioes(listaPista);
-            limparListaAvioes(listaPartida);
-            carregarListaAprox(ListaAprox,"listaAprox.txt");
-            carregarListaPista(listaPista, "listaPista.txt");
-            carregarListaPartida(listaPartida, "listaPartida.txt");
-            imprimirListaPista(listaPista); // meti isto para ver se o carregar estava a dar
-            imprimirListaPartida(listaPartida);
-             */
-            std::cout << "Dados carregados com sucesso! " << std::endl; // mudar isto é temp
+            std::cout << "Escolheu a opcao Opcoes! " << std::endl; // mudar isto é temp
             break;
         case 'g':
-            gravarListaAprox(ListaAprox, "listaAprox.txt");
-            gravarListaPista(listaPista, "listaPista.txt");
-            gravarListaPartida(listaPartida, "listaPartida.txt");
-            std::cout << "Listas gravadas com sucesso!" << std::endl;
+            gravarLista(ListaAprox, "listaAprox.txt");
+            gravarLista(listaPista, "listaPista.txt");
+            gravarLista(listaPartida, "listaPartida.txt");
             break;
         case 's':
             if (countAvioes(ListaAprox) < 10){
@@ -66,6 +55,17 @@ void aeroportoMenu(){
             std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
             sair = true;
             return;
+        case 'c':
+            carregarListaAprox(ListaAprox);
+            carregarListaPista(listaPista);
+            carregarListaPartida(listaPartida);
+
+            imprimirListaAprox(ListaAprox);
+            imprimirListaPista(listaPista);
+            imprimirListaPartida(listaPartida);
+
+            std::cout << "Dados carregados com sucesso! " << std::endl;
+            break;
         default:
             std::cout << "Opção inválida!" << std::endl;
             break;

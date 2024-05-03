@@ -1,7 +1,13 @@
 #include "fstream"
 #include "carregar.h"
 #include "aviao.h"
-/*
+
+
+/**
+ * Limpa a lista
+ *
+ * @param lista Um ponteiro para o primeiro nó da lista
+ */
 void limparLista(Aviao*& lista) {
     while (lista != nullptr) {
         Aviao* proximo = lista->proximoAviao;
@@ -10,7 +16,14 @@ void limparLista(Aviao*& lista) {
     }
 }
 
-void carregarListaAprox(Aviao*& listaAprox, const std::string& nomeArquivo) {
+
+/**
+ * Serve para carregar os dados guardados na lista
+ *
+ * @param lista Um ponteiro para o início da lista
+ * @param nomeArquivo O nome do arquivo de texto com os dados dos aviões
+ */
+void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
     std::ifstream arquivo(nomeArquivo);
 
     if (!arquivo.is_open()) {
@@ -18,13 +31,20 @@ void carregarListaAprox(Aviao*& listaAprox, const std::string& nomeArquivo) {
         return;
     }
 
-    // Cria uma lista temporária para armazenar os novos aviões
     Aviao* listaTemp = nullptr;
 
     std::string nomeVoo, modeloAviao, origem, destino;
     int capacidade;
+    std::string dummy; // Variável dummy para descartar linhas desnecessárias
 
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
+    while (std::getline(arquivo, nomeVoo) &&
+           std::getline(arquivo, modeloAviao) &&
+           std::getline(arquivo, origem) &&
+           std::getline(arquivo, destino) &&
+           arquivo >> capacidade) {
+        // Descartar a linha em branco após cada conjunto de dados
+        std::getline(arquivo, dummy);
+
         Aviao* novoAviaoPonteiro = novoAviao();
         novoAviaoPonteiro->nomeVoo = nomeVoo;
         novoAviaoPonteiro->modeloAviao = modeloAviao;
@@ -32,104 +52,23 @@ void carregarListaAprox(Aviao*& listaAprox, const std::string& nomeArquivo) {
         novoAviaoPonteiro->destino = destino;
         novoAviaoPonteiro->capacidade = capacidade;
 
-        // Adiciona o novo avião à lista temporária
         novoAviaoPonteiro->proximoAviao = listaTemp;
         listaTemp = novoAviaoPonteiro;
     }
 
-    // Limpa a lista original
-    //limparLista(listaAprox);
-
-    // Concatena a lista temporária à lista original
-    Aviao* temp = listaTemp;
-    while (temp != nullptr) {
-        Aviao* proximo = temp->proximoAviao;
-        temp->proximoAviao = listaAprox;
-        listaAprox = temp;
-        temp = proximo;
-    }
-
-    arquivo.close();
-}
-
-void carregarListaPista(Aviao*& listaPista, const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
+    if (arquivo.fail() && !arquivo.eof()) {
+        std::cerr << "Erro durante a leitura do arquivo." << std::endl;
+        arquivo.close();
         return;
     }
 
-    // Cria uma lista temporária para armazenar os novos aviões
-    Aviao* listaTemp = nullptr;
+    limparLista(lista); // Limpa a lista original
 
-    std::string nomeVoo, modeloAviao, origem, destino;
-    int capacidade;
-
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
-        Aviao* novoAviaoPonteiro = novoAviao();
-        novoAviaoPonteiro->nomeVoo = nomeVoo;
-        novoAviaoPonteiro->modeloAviao = modeloAviao;
-        novoAviaoPonteiro->origem = origem;
-        novoAviaoPonteiro->destino = destino;
-        novoAviaoPonteiro->capacidade = capacidade;
-
-        // Adiciona o novo avião à lista temporária
-        novoAviaoPonteiro->proximoAviao = listaTemp;
-        listaTemp = novoAviaoPonteiro;
-    }
-
-    // Limpa a lista original
-    //limparLista(listaPista);
-
-    // Concatena a lista temporária à lista original
     Aviao* temp = listaTemp;
     while (temp != nullptr) {
         Aviao* proximo = temp->proximoAviao;
-        temp->proximoAviao = listaPista;
-        listaPista = temp;
-        temp = proximo;
-    }
-
-    arquivo.close();
-}
-
-void carregarListaPartida(Aviao*& listaPartida, const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
-        return;
-    }
-
-    // Cria uma lista temporária para armazenar os novos aviões
-    Aviao* listaTemp = nullptr;
-
-    std::string nomeVoo, modeloAviao, origem, destino;
-    int capacidade;
-
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
-        Aviao* novoAviaoPonteiro = novoAviao();
-        novoAviaoPonteiro->nomeVoo = nomeVoo;
-        novoAviaoPonteiro->modeloAviao = modeloAviao;
-        novoAviaoPonteiro->origem = origem;
-        novoAviaoPonteiro->destino = destino;
-        novoAviaoPonteiro->capacidade = capacidade;
-
-        // Adiciona o novo avião à lista temporária
-        novoAviaoPonteiro->proximoAviao = listaTemp;
-        listaTemp = novoAviaoPonteiro;
-    }
-
-    // Limpa a lista original
-    //limparLista(listaPartida);
-
-    // Concatena a lista temporária à lista original
-    Aviao* temp = listaTemp;
-    while (temp != nullptr) {
-        Aviao* proximo = temp->proximoAviao;
-        temp->proximoAviao = listaPartida;
-        listaPartida = temp;
+        temp->proximoAviao = lista;
+        lista = temp;
         temp = proximo;
     }
 
@@ -138,122 +77,18 @@ void carregarListaPartida(Aviao*& listaPartida, const std::string& nomeArquivo) 
 
 
 
-// primeira
 
-void carregarListaAprox(Aviao*& listaAprox, const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
-        return;
-    }
-
-    std::string nomeVoo, modeloAviao, origem, destino;
-    int capacidade;
-
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
-        Aviao* novoAviaoPonteiro = novoAviao();
-        novoAviaoPonteiro->nomeVoo = nomeVoo;
-        novoAviaoPonteiro->modeloAviao = modeloAviao;
-        novoAviaoPonteiro->origem = origem;
-        novoAviaoPonteiro->destino = destino;
-        novoAviaoPonteiro->capacidade = capacidade;
-
-        // Adicione o novo avião à lista de aproximação
-        if (listaAprox == nullptr) {
-            listaAprox = novoAviaoPonteiro;
-        } else {
-            Aviao* temp = listaAprox;
-            while (temp->proximoAviao != nullptr) {
-                temp = temp->proximoAviao;
-            }
-            temp->proximoAviao = novoAviaoPonteiro;
-        }
-    }
-
-    arquivo.close();
+void carregarListaAprox(Aviao*& ListaAprox) {
+    carregarLista(ListaAprox, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaAprox.txt");
+    std::cout << "aprox" << std::endl;
 }
 
-void carregarListaPista(Aviao*& listaPista, const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
-        return;
-    }
-
-    std::string nomeVoo, modeloAviao, origem, destino;
-    int capacidade;
-
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
-        Aviao* novoAviaoPonteiro = novoAviao();
-        novoAviaoPonteiro->nomeVoo = nomeVoo;
-        novoAviaoPonteiro->modeloAviao = modeloAviao;
-        novoAviaoPonteiro->origem = origem;
-        novoAviaoPonteiro->destino = destino;
-        novoAviaoPonteiro->capacidade = capacidade;
-
-        // Adicione o novo avião à lista de pista
-        if (listaPista == nullptr) {
-            listaPista = novoAviaoPonteiro;
-        } else {
-            Aviao* temp = listaPista;
-            while (temp->proximoAviao != nullptr) {
-                temp = temp->proximoAviao;
-            }
-            temp->proximoAviao = novoAviaoPonteiro;
-        }
-    }
-
-    arquivo.close();
+void carregarListaPista(Aviao*& listaPista) {
+    carregarLista(listaPista, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaPista.txt");
+    std::cout << "pista" << std::endl;
 }
 
-void carregarListaPartida(Aviao*& listaPartida, const std::string& nomeArquivo) {
-    std::ifstream arquivo(nomeArquivo);
-
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para leitura." << std::endl;
-        return;
-    }
-
-    std::string nomeVoo, modeloAviao, origem, destino;
-    int capacidade;
-
-    while (arquivo >> nomeVoo >> modeloAviao >> origem >> destino >> capacidade) {
-        Aviao* novoAviaoPonteiro = novoAviao();
-        novoAviaoPonteiro->nomeVoo = nomeVoo;
-        novoAviaoPonteiro->modeloAviao = modeloAviao;
-        novoAviaoPonteiro->origem = origem;
-        novoAviaoPonteiro->destino = destino;
-        novoAviaoPonteiro->capacidade = capacidade;
-
-        // Adicione o novo avião à lista de partida
-        if (listaPartida == nullptr) {
-            listaPartida = novoAviaoPonteiro;
-        } else {
-            Aviao* temp = listaPartida;
-            while (temp->proximoAviao != nullptr) {
-                temp = temp->proximoAviao;
-            }
-            temp->proximoAviao = novoAviaoPonteiro;
-        }
-    }
-
-    arquivo.close();
+void carregarListaPartida(Aviao*& listaPartida) {
+    carregarLista(listaPartida, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaPartida.txt");
+    std::cout << "partida" << std::endl;
 }
-
-
-
-
-// Função para limpar a lista de aviões
-void limparListaAvioes(Aviao*& listaAvioes) {
-    Aviao* atual = listaAvioes;
-    while (atual != nullptr) {
-        Aviao* proximo = atual->proximoAviao;
-        delete atual;
-        atual = proximo;
-    }
-    listaAvioes = nullptr; // Define a lista como vazia
-}
-
-*/

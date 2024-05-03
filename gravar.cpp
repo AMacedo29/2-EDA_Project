@@ -3,8 +3,14 @@
 #include "passageiros.h"
 #include "fstream"
 
-// Função para gravar a lista de aviões em um arquivo
-void gravarListaAprox(Aviao* listaAvioes, const std::string& nomeArquivo) {
+
+/**
+ * Grava os dados de uma lista de aviões em um arquivo
+ *
+ * @param listaAvioes Um ponteiro para o início da lista de aviões
+ * @param nomeArquivo O nome do arquivo onde os dados serão gravados
+ */
+void gravarLista(Aviao* listaAvioes, const std::string& nomeArquivo) {
     std::ofstream arquivo(nomeArquivo);
 
     // Verifica se o arquivo foi aberto com sucesso
@@ -13,14 +19,14 @@ void gravarListaAprox(Aviao* listaAvioes, const std::string& nomeArquivo) {
         return;
     }
 
-    // Percorre a lista de aviões e grava os dados de cada avião no arquivo
+    // Percorre a lista e grava os dados de cada avião no arquivo
     Aviao* aviaoAtual = listaAvioes;
     while (aviaoAtual != nullptr) {
-        arquivo << "Nome do voo: " << aviaoAtual->nomeVoo << std::endl;
-        arquivo << "Modelo do avião: " << aviaoAtual->modeloAviao << std::endl;
-        arquivo << "Origem: " << aviaoAtual->origem << std::endl;
-        arquivo << "Destino: " << aviaoAtual->destino << std::endl;
-        arquivo << "Capacidade: " << aviaoAtual->capacidade << std::endl;
+        arquivo <<  aviaoAtual->nomeVoo << std::endl;
+        arquivo <<  aviaoAtual->modeloAviao << std::endl;
+        arquivo <<  aviaoAtual->origem << std::endl;
+        arquivo <<  aviaoAtual->destino << std::endl;
+        arquivo <<  aviaoAtual->capacidade << std::endl;
         arquivo << std::endl;
 
         // Avança para o próximo avião na lista
@@ -30,64 +36,3 @@ void gravarListaAprox(Aviao* listaAvioes, const std::string& nomeArquivo) {
     // Fecha o arquivo após concluir a gravação
     arquivo.close();
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void gravarListaPista(Aviao* listaPista, const std::string& nomeArquivo) {
-    std::ofstream arquivo(nomeArquivo);
-
-    // Verifica se o arquivo foi aberto com sucesso
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
-        return;
-    }
-
-    // Percorre a lista de aviões na pista e grava os dados de cada avião no arquivo
-    Aviao* aviaoAtual = listaPista;
-    while (aviaoAtual != nullptr) {
-        arquivo << "Nome do voo: " << aviaoAtual->nomeVoo << std::endl;
-        arquivo << "Modelo do avião: " << aviaoAtual->modeloAviao << std::endl;
-        arquivo << "Origem: " << aviaoAtual->origem << std::endl;
-        arquivo << "Destino: " << aviaoAtual->destino << std::endl;
-        arquivo << "Capacidade: " << aviaoAtual->capacidade << std::endl;
-        arquivo << std::endl;
-
-        // Avança para o próximo avião na lista
-        aviaoAtual = aviaoAtual->proximoAviao;
-    }
-
-    // Fecha o arquivo após concluir a gravação
-    arquivo.close();
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-void gravarListaPartida(Aviao* listaPartida, const std::string& nomeArquivo) {
-    std::ofstream arquivo(nomeArquivo);
-
-    // Verifica se o arquivo foi aberto com sucesso
-    if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo para escrita." << std::endl;
-        return;
-    }
-
-    // Percorre a lista de aviões que estão partindo e grava os dados de cada avião no arquivo
-    Aviao* aviaoAtual = listaPartida;
-    while (aviaoAtual != nullptr) {
-        arquivo << "Nome do voo: " << aviaoAtual->nomeVoo << std::endl;
-        arquivo << "Modelo do avião: " << aviaoAtual->modeloAviao << std::endl;
-        arquivo << "Origem: " << aviaoAtual->origem << std::endl;
-        arquivo << "Destino: " << aviaoAtual->destino << std::endl;
-        arquivo << "Capacidade: " << aviaoAtual->capacidade << std::endl;
-        arquivo << std::endl;
-
-        // Avança para o próximo avião na lista
-        aviaoAtual = aviaoAtual->proximoAviao;
-    }
-
-    // Fecha o arquivo após concluir a gravação
-    arquivo.close();
-}
-

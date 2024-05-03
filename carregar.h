@@ -3,12 +3,12 @@
 #include "aviao.h"
 
 
-void carregarListaAprox(Aviao*& listaAprox, const std::string& nomeArquivo);
+void carregarLista(Aviao*& lista, const std::string& nomeArquivo);
 
-void carregarListaPista(Aviao*& listaPista, const std::string& nomeArquivo);
+void carregarListaAprox(Aviao*& ListaAprox);
 
-void carregarListaPartida(Aviao*& listaPartida, const std::string& nomeArquivo);
+void carregarListaPista(Aviao*& listaPista);
 
-void limparListaAvioes(Aviao*& listaAvioes);
+void carregarListaPartida(Aviao*& listaPartida);
 
 #endif //INC_2_EDA_PROJECT_CARREGAR_H
