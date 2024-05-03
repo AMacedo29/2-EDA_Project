@@ -57,8 +57,13 @@ void aeroportoMenu(){
             return;
         case 'c':
             carregarListaAprox(ListaAprox);
+            std::cout << "Aprox" << std::endl;
+
             carregarListaPista(listaPista);
+            std::cout << "Pista" << std::endl;
+
             carregarListaPartida(listaPartida);
+            std::cout << "Partida" << std::endl;
 
             imprimirListaAprox(ListaAprox);
             imprimirListaPista(listaPista);

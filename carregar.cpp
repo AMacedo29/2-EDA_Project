@@ -80,15 +80,12 @@ void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
 
 void carregarListaAprox(Aviao*& ListaAprox) {
     carregarLista(ListaAprox, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaAprox.txt");
-    std::cout << "aprox" << std::endl;
 }
 
 void carregarListaPista(Aviao*& listaPista) {
     carregarLista(listaPista, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaPista.txt");
-    std::cout << "pista" << std::endl;
 }
 
 void carregarListaPartida(Aviao*& listaPartida) {
     carregarLista(listaPartida, "C://Users//andre//CLionProjects//2-EDA_Project//cmake-build-debug//listaPartida.txt");
-    std::cout << "partida" << std::endl;
 }
