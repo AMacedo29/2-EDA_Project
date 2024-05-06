@@ -5,7 +5,7 @@
 #include "simulacao.h"
 #include "gravar.h"
 #include "carregar.h"
-
+#include "passageiros.h"
 
 void aeroportoMenu(){
     Aviao* ListaAprox = nullptr;
@@ -85,9 +85,14 @@ void addListaAprox(Aviao*& ListaAprox){
     if (ListaAprox == nullptr) {
         for (int i = 0; i < 10; ++i) {
             ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox);
+            for (int j = 0; j < ListaAprox->capacidade; ++j) {
+                adicionarPassageiro(ListaAprox->proximoPassageiro); // Passa o ponteiro para o próximo passageiro
+            }
         }
     }
 }
+
+
 
 void imprimirListaAprox(Aviao* ListaAprox){
     std::cout << "(e)mergencias (o)pcoes (g)ravar" << std::endl;

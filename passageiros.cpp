@@ -53,13 +53,7 @@ int contarPassageiros(Aviao* aviao) {
  *
  * @param aviao Ponteiro para o avião em que o passageiro será inserido
  */
-void adicionarPassageiro(Aviao* aviao) {
-    // Verifica se o número de passageiros já atingiu a capacidade máxima do avião
-    if (contarPassageiros(aviao) >= aviao->capacidade) {
-        std::cout << "O avião já atingiu a capacidade máxima de passageiros." << std::endl;
-        return;
-    }
-
+void adicionarPassageiro(Passageiro*& proximoPassageiro) {
     // Cria um novo passageiro
     Passageiro* novoPassageiro = new Passageiro;
     novoPassageiro->numeroDoBilhete = gerarBilheteAleatorio();
@@ -68,24 +62,25 @@ void adicionarPassageiro(Aviao* aviao) {
     novoPassageiro->nacionalidade = getRandomNacionalidade();
     novoPassageiro->next = nullptr;
 
-    // Se não houver passageiros na lista, o novo passageiro será o primeiro
-    if (aviao->proximoPassageiro == nullptr) {
-        aviao->proximoPassageiro = novoPassageiro;
+    // Se a lista estiver vazia, o novo passageiro será o primeiro
+    if (proximoPassageiro == nullptr) {
+        proximoPassageiro = novoPassageiro;
     } else {
-        // Caso contrário, percorra a lista até o último passageiro e adicione o novo passageiro lá
-        Passageiro* ultimoPassageiro = aviao->proximoPassageiro;
+        // Caso contrário, vai até ao último passageiro e adicione o novo passageiro lá
+        Passageiro* ultimoPassageiro = proximoPassageiro;
         while (ultimoPassageiro->next != nullptr) {
             ultimoPassageiro = ultimoPassageiro->next;
         }
         ultimoPassageiro->next = novoPassageiro;
     }
-
-    // Exibe informações sobre o novo passageiro
+    /* / n está a ser usado de momento
+    // Informações sobre o novo passageiro
     std::cout << "Novo passageiro adicionado ao avião:" << std::endl;
     std::cout << "Bilhete: " << novoPassageiro->numeroDoBilhete << std::endl;
     std::cout << "Nome: " << novoPassageiro->primeiroNome << " " << novoPassageiro->segundoNome << std::endl;
     std::cout << "Nacionalidade: " << novoPassageiro->nacionalidade << std::endl;
     std::cout << std::endl;
+    */
 }
 
 

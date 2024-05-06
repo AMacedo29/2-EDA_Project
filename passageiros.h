@@ -18,9 +18,9 @@ struct Passageiro{
 
 //void novoPassageiro();
 
-//int contarPassageiros();
+int contarPassageiros();
 
-//void adicionarPassageiro();
+void adicionarPassageiro(Passageiro*& proximoPassageiro);
 
 
 #endif //INC_2_EDA_PROJECT_PASSAGEIROS_H
