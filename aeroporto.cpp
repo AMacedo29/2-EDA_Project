@@ -6,6 +6,7 @@
 #include "gravar.h"
 #include "carregar.h"
 #include "passageiros.h"
+#include "emergencias.h"
 
 void aeroportoMenu(){
     Aviao* ListaAprox = nullptr;
@@ -27,7 +28,8 @@ void aeroportoMenu(){
             std::cout <<" ainda n tem nada " << std::endl;
             break;
         case 'o':
-            std::cout << "Escolheu a opcao Opcoes! " << std::endl; // mudar isto é temp
+            escolherDiasParaFecharAeroporto();
+            std::cout << "Escolheu a opcao Opcoes! " << std::endl;
             break;
         case 'g':
             gravarLista(ListaAprox, "listaAprox.txt");
@@ -35,20 +37,33 @@ void aeroportoMenu(){
             gravarLista(listaPartida, "listaPartida.txt");
             break;
         case 's':
-            if (countAvioes(ListaAprox) < 10){
+            if (countAvioes(ListaAprox) < 10 && aeroportoFechado != true) {
                 ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox);
             }
-            imprimirListaAprox(ListaAprox);
+
             if (countAvioes(listaPista) < 7 && ListaAprox != nullptr) {
-                moverUltimoParaListaPista(&ListaAprox, &listaPista);;
+                moverUltimoParaListaPista(&ListaAprox, &listaPista);
             }
-            imprimirListaPista(listaPista);
-            if (countAvioes(listaPartida) < 5 && countAvioes(listaPista) >= 7 && ListaAprox != nullptr ) {
+
+            if (countAvioes(listaPista) >= 7 && ListaAprox != nullptr) {
                 moverUltimoParaListaPartidas(&listaPista, &listaPartida);
             }
-            imprimirListaPartida(listaPartida);
-            if (countAvioes(listaPista) > 5){
+
+            if (countAvioes(listaPartida) > 5) {
                 removeUltimo(&listaPartida);
+            }
+
+            imprimirListaAprox(ListaAprox);
+            imprimirListaPista(listaPista);
+            imprimirListaPartida(listaPartida);
+
+            if (aeroportoFechado) {
+                if (diasRestantesAeroportoFechado > 0) {
+                    --diasRestantesAeroportoFechado;
+                    std::cout << "Aeroporto fechado. Faltam " << diasRestantesAeroportoFechado << " dias para reabrir." << std::endl;
+                } else {
+                    aeroportoFechado = false;
+                }
             }
             break;
         case 'b':
