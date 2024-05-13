@@ -28,7 +28,20 @@ void gravarLista(Aviao* listaAvioes, const std::string& nomeArquivo) {
         arquivo <<  aviaoAtual->destino << std::endl;
         arquivo <<  aviaoAtual->capacidade << std::endl;
         arquivo << std::endl;
+/* //dar fix dps
+        // Percorre a lista de passageiros do avião e grava os dados de cada passageiro
+        Passageiro* passageiroAtual = aviaoAtual->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            arquivo << passageiroAtual->numeroDoBilhete << std::endl;
+            arquivo << passageiroAtual->primeiroNome << std::endl;
+            arquivo << passageiroAtual->segundoNome << std::endl;
+            arquivo << passageiroAtual->nacionalidade << std::endl;
+            arquivo << std::endl;
+            passageiroAtual = passageiroAtual->next;
+        }
 
+        arquivo << std::endl;
+*/
         // Avança para o próximo avião na lista
         aviaoAtual = aviaoAtual->proximoAviao;
     }

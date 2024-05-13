@@ -24,7 +24,7 @@ int randomNumber(int minVal, int maxVal) {
  *
  * @return Bilhete "Aleatorio".
  */
-    std::string gerarBilheteAleatorio(){
+std::string gerarBilheteAleatorio(){
     int numeroAleatorio = randomNumber(1000000, 9999999); // Gera um número entre 1000000 e 9999999
     return "TK" + std::to_string(numeroAleatorio); // Converte o número aleatório para string e finaliza o bilhete
 }

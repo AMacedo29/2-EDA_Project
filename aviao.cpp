@@ -10,7 +10,7 @@ Aviao* novoAviao(){
     elemento->modeloAviao = getRandomModelo();
     elemento->origem = getRandomOrigem();
     elemento->destino = getRandomDestino();
-    elemento->capacidade = randomNumber(5,15);
+    elemento->capacidade = randomNumber(10,15);
     elemento->proximoPassageiro = nullptr;
 
     return elemento;

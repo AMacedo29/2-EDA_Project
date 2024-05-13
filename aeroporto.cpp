@@ -28,7 +28,7 @@ void aeroportoMenu(){
             std::cout <<" ainda n tem nada " << std::endl;
             break;
         case 'o':
-            escolherDiasParaFecharAeroporto();
+            menuOpcoes();
             std::cout << "Escolheu a opcao Opcoes! " << std::endl;
             break;
         case 'g':
@@ -121,8 +121,21 @@ void imprimirListaAprox(Aviao* ListaAprox){
         std::cout << "Modelo: " << aviaoAtual->modeloAviao << std::endl;
         std::cout << "Origem: " << aviaoAtual->origem << std::endl;
         std::cout << "Destino: " << aviaoAtual->destino << std::endl;
+
+        // Imprime o nome dos passageiros (apenas o primeiroNome)
+        std::cout << "Passageiros: ";
+        Passageiro* passageiroAtual = aviaoAtual->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            std::cout << passageiroAtual->primeiroNome;
+            if (passageiroAtual->next != nullptr) {
+                std::cout << ", ";
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+
         std::cout << std::endl;
         aviaoAtual = aviaoAtual->proximoAviao;
+        std::cout << " " << std::endl; // É para dar espaço entre os aviões
     }
 }
 
@@ -135,8 +148,21 @@ void imprimirListaPista(Aviao* listaPista){
         std::cout << "Modelo: " << listaPista->modeloAviao << std::endl;
         std::cout << "Origem: " << listaPista->origem << std::endl;
         std::cout << "Destino: " << listaPista->destino << std::endl;
+
+        // Imprime o nome dos passageiros (apenas o primeiroNome)
+        std::cout << "Passageiros: ";
+        Passageiro* passageiroAtual = listaPista->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            std::cout << passageiroAtual->primeiroNome;
+            if (passageiroAtual->next != nullptr) {
+                std::cout << ", ";
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+
         std::cout << std::endl;
         listaPista = listaPista->proximoAviao;
+        std::cout << " " << std::endl; // É para dar espaço entre os aviões
     }
 }
 
@@ -149,8 +175,20 @@ void imprimirListaPartida(Aviao* listaPartida){
         std::cout << "Modelo: " << listaPartida->modeloAviao << std::endl;
         std::cout << "Origem: " << listaPartida->origem << std::endl;
         std::cout << "Destino: " << listaPartida->destino << std::endl;
+
+        // Imprime o nome dos passageiros (apenas o primeiroNome)
+        std::cout << "Passageiros: ";
+        Passageiro* passageiroAtual = listaPartida->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            std::cout << passageiroAtual->primeiroNome;
+            if (passageiroAtual->next != nullptr) {
+                std::cout << ", ";
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+
         std::cout << std::endl;
         listaPartida = listaPartida->proximoAviao;
+        std::cout << " " << std::endl; // É para dar espaço entre os aviões
     }
-
 }

@@ -51,7 +51,22 @@ void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
         novoAviaoPonteiro->origem = origem;
         novoAviaoPonteiro->destino = destino;
         novoAviaoPonteiro->capacidade = capacidade;
-
+/* //dar fix dps
+        // Carregar passageiros
+        std::string numeroDoBilhete, primeiroNome, segundoNome, nacionalidade;
+        while (std::getline(arquivo, numeroDoBilhete) &&
+               std::getline(arquivo, primeiroNome) &&
+               std::getline(arquivo, segundoNome) &&
+               std::getline(arquivo, nacionalidade)) {
+            Passageiro* novoPassageiro = new Passageiro;
+            novoPassageiro->numeroDoBilhete = numeroDoBilhete;
+            novoPassageiro->primeiroNome = primeiroNome;
+            novoPassageiro->segundoNome = segundoNome;
+            novoPassageiro->nacionalidade = nacionalidade;
+            novoPassageiro->next = novoAviaoPonteiro->proximoPassageiro;
+            novoAviaoPonteiro->proximoPassageiro  = novoPassageiro;
+        }
+*/
         novoAviaoPonteiro->proximoAviao = listaTemp;
         listaTemp = novoAviaoPonteiro;
     }
@@ -74,8 +89,7 @@ void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
 
     arquivo.close();
 }
-
-
+//debug aqui para ver os passageiros
 
 
 void carregarListaAprox(Aviao*& ListaAprox) {
