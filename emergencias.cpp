@@ -57,7 +57,7 @@ bool digito(const std::string& str) {
 void fecharAeroporto() {
     std::string input;
     int numeroDeDias;
-    std::cout << "Digite o número de dias que o aeroporto ficará fechado: ";
+    std::cout << "Digite o numero de dias que o aeroporto ficara fechado: ";
     std::cin >> input;
     if (digito(input)) {
         int numeroDeDias = std::stoi(input); // Isto é para transformar de str para itn
@@ -69,7 +69,7 @@ void fecharAeroporto() {
         }
     }
     // Se o input não for entre 1 e 5 vem para aqui e fica defenico com 5
-    std::cout << "Entrada inválida ou fora do intervalo. O aeroporto será fechado por 5 dias." << std::endl;
+    std::cout << "Entrada invalida ou fora do intervalo. O aeroporto sera fechado por 5 dias." << std::endl;
     numeroDeDias = 5;
     diasRestantesAeroportoFechado = numeroDeDias;
     aeroportoFechado = true;

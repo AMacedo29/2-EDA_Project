@@ -37,20 +37,40 @@ void aeroportoMenu(){
             gravarLista(listaPartida, "listaPartida.txt");
             break;
         case 's':
-            if (countAvioes(ListaAprox) < 10 && aeroportoFechado != true) {
-                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox);
+            ///////////////////////////////////////////// Estas são do 3.6 /////////////////////////////////////////////
+
+            if (countAvioes(ListaAprox) >= 11 && countAvioes(ListaAprox) <= 15 && aeroportoFechado == false ) {
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // quando o aeroporto volta a abrir a lista tem que receber avioes mesmo tendo passado do seu max
             }
 
-            if (countAvioes(listaPista) < 7 && ListaAprox != nullptr) {
-                moverUltimoParaListaPista(&ListaAprox, &listaPista);
+            if (countAvioes(ListaAprox) >= 11 && countAvioes(ListaAprox) <= 15 && aeroportoFechado == false ) {
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // quando o aeroporto volta a abrir a lista tem que receber avioes mesmo tendo passado do seu max
             }
 
-            if (countAvioes(listaPista) >= 7 && ListaAprox != nullptr) {
-                moverUltimoParaListaPartidas(&listaPista, &listaPartida);
+            if (countAvioes(ListaAprox) >= 11 && aeroportoFechado == false) {
+                moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaAprox tiver + de 10 avioes ela move +1 aviao para a prox lista até ela voltar ao seu max "normal"
+            }
+
+            if (countAvioes(ListaAprox) < 15 && aeroportoFechado == true) {
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes msm com o aeroporto fechado até ao max de 15 (pq ele so fica fechado ate 5 dias)
+            }
+
+            if (countAvioes(listaPista) >= 8 && aeroportoFechado == false) {
+                moverUltimoParaListaPartidas(&listaPista, &listaPartida); // vai +1 da listaPista para a listaPartida caso esteja com a capacidade acima do max
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            if (countAvioes(ListaAprox) < 10 && aeroportoFechado == false) {
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes com o aeroporto aberto e com menos de 10 avioes na lista
+            }
+
+            if (countAvioes(listaPista) <= 7 && ListaAprox != nullptr && aeroportoFechado == false) {
+                moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaPista tiver menos de 7 avioes (se nao tiver cheia neste caso) vem 1 aviao da ListaAprox
             }
 
             if (countAvioes(listaPartida) > 5) {
-                removeUltimo(&listaPartida);
+                removeUltimo(&listaPartida); // se a lista estiver cheia remove o ultimo aviao
             }
 
             imprimirListaAprox(ListaAprox);
@@ -58,11 +78,12 @@ void aeroportoMenu(){
             imprimirListaPartida(listaPartida);
 
             if (aeroportoFechado) {
-                if (diasRestantesAeroportoFechado > 0) {
+                if (diasRestantesAeroportoFechado -1  > 0) { // ele estava a fechar por 1 dia
                     --diasRestantesAeroportoFechado;
                     std::cout << "Aeroporto fechado. Faltam " << diasRestantesAeroportoFechado << " dias para reabrir." << std::endl;
                 } else {
                     aeroportoFechado = false;
+                    std::cout << "Aeroporto fechado. Faltam 0 dias para reabrir." << std::endl; // como aranjei a outra linha com o -1 rebentei o print da outra linha e este vem para fingir que está tudo bem
                 }
             }
             break;
@@ -87,7 +108,7 @@ void aeroportoMenu(){
             std::cout << "Dados carregados com sucesso! " << std::endl;
             break;
         default:
-            std::cout << "Opção inválida!" << std::endl;
+            std::cout << "Opcao invalida!" << std::endl;
             break;
         }
     }while (!sair);
