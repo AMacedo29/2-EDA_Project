@@ -15,9 +15,10 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
         atual = atual->proximoAviao;
     }
 
-    // Serve para mudar a origem e o destino dos avioes
+    // Serve para mudar a origem, o destino e o numero(nos temos nome) de voo dos avioes
     atual->destino = getRandomDestino();
     atual->origem = "Aeroporto EDA";
+    atual->nomeVoo = getRandomVoo();
 
     atual->proximoAviao = *listaPista;
     *listaPista = *ListaAprox;
