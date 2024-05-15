@@ -39,8 +39,8 @@ void aeroportoMenu(){
         case 's':
             ///////////////////////////////////////////// Estas são do 3.6 /////////////////////////////////////////////
 
-            if (countAvioes(ListaAprox) >= 11 && countAvioes(ListaAprox) <= 15 && aeroportoFechado == false ) {
-                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // quando o aeroporto volta a abrir a lista tem que receber avioes mesmo tendo passado do seu max
+            if (countAvioes(ListaAprox) < 15 && aeroportoFechado == true) {
+                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes msm com o aeroporto fechado até ao max de 15 (pq ele so fica fechado ate 5 dias)
             }
 
             if (countAvioes(ListaAprox) >= 11 && countAvioes(ListaAprox) <= 15 && aeroportoFechado == false ) {
@@ -51,22 +51,26 @@ void aeroportoMenu(){
                 moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaAprox tiver + de 10 avioes ela move +1 aviao para a prox lista até ela voltar ao seu max "normal"
             }
 
-            if (countAvioes(ListaAprox) < 15 && aeroportoFechado == true) {
-                ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes msm com o aeroporto fechado até ao max de 15 (pq ele so fica fechado ate 5 dias)
+            if (countAvioes(listaPista) >= 8 && aeroportoFechado == false) {
+                moverUltimoParaListaPartidas(&listaPista, &listaPartida); // vai +1 da listaPista para a listaPartida caso esteja com a capacidade max
             }
 
-            if (countAvioes(listaPista) >= 8 && aeroportoFechado == false) {
-                moverUltimoParaListaPartidas(&listaPista, &listaPartida); // vai +1 da listaPista para a listaPartida caso esteja com a capacidade acima do max
+            if (countAvioes(listaPartida) >= 6 && aeroportoFechado == false) {
+                removeUltimo(&listaPartida); // se a lista estiver mais do que cheia remove o ultimo aviao
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (countAvioes(ListaAprox) < 10 && aeroportoFechado == false) {
+            if (countAvioes(ListaAprox) <= 10 && aeroportoFechado == false) {
                 ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes com o aeroporto aberto e com menos de 10 avioes na lista
             }
 
             if (countAvioes(listaPista) <= 7 && ListaAprox != nullptr && aeroportoFechado == false) {
-                moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaPista tiver menos de 7 avioes (se nao tiver cheia neste caso) vem 1 aviao da ListaAprox
+                moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaPista tiver 7 ou menos avioes vem 1 aviao da ListaAprox
+            }
+
+            if (countAvioes(listaPista) >= 7 && aeroportoFechado == false) {
+                moverUltimoParaListaPartidas(&listaPista, &listaPartida); // se a listaPista tiver 7 ou mais avioes move 1 aviao para a partida
             }
 
             if (countAvioes(listaPartida) > 5) {
@@ -77,8 +81,8 @@ void aeroportoMenu(){
             imprimirListaPista(listaPista);
             imprimirListaPartida(listaPartida);
 
-            if (aeroportoFechado) {
-                if (diasRestantesAeroportoFechado -1  > 0) { // ele estava a fechar por 1 dia
+            if (aeroportoFechado == true) {
+                if (diasRestantesAeroportoFechado -1  > 0) { // ele estava a fechar por 1 dia a mais
                     --diasRestantesAeroportoFechado;
                     std::cout << "Aeroporto fechado. Faltam " << diasRestantesAeroportoFechado << " dias para reabrir." << std::endl;
                 } else {

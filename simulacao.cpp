@@ -1,5 +1,6 @@
 #include "simulacao.h"
 #include "aviao.h"
+#include "utils.h"
 
 
 void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
@@ -13,6 +14,10 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
         anterior = atual;
         atual = atual->proximoAviao;
     }
+
+    // Serve para mudar a origem e o destino dos avioes
+    atual->destino = getRandomDestino();
+    atual->origem = "Aeroporto EDA";
 
     atual->proximoAviao = *listaPista;
     *listaPista = *ListaAprox;
