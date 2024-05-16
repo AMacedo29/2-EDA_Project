@@ -23,6 +23,10 @@ Aviao* inserirAviaoAprox(Aviao** aNodo, Aviao* &ListaAprox) {
     } else {
         novo->proximoAviao = *aNodo;
         *aNodo = novo;
+        // Adicionar passageiros ao avião
+        for (int i = 0; i < novo->capacidade; ++i) {
+            adicionarPassageiro(novo->proximoPassageiro);
+        }
     }
     return *aNodo;
 }
