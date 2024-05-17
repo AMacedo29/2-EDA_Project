@@ -10,9 +10,9 @@
  */
 void limparLista(Aviao*& lista) {
     while (lista != nullptr) {
-        Aviao* proximo = lista->proximoAviao;
-        delete lista;
-        lista = proximo;
+        Aviao* temp = lista;
+        lista = lista->proximoAviao;
+        delete temp;
     }
 }
 

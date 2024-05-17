@@ -73,14 +73,6 @@ void adicionarPassageiro(Passageiro*& proximoPassageiro) {
         }
         ultimoPassageiro->next = novoPassageiro;
     }
-    /* / n está a ser usado de momento
-    // Informações sobre o novo passageiro
-    std::cout << "Novo passageiro adicionado ao avião:" << std::endl;
-    std::cout << "Bilhete: " << novoPassageiro->numeroDoBilhete << std::endl;
-    std::cout << "Nome: " << novoPassageiro->primeiroNome << " " << novoPassageiro->segundoNome << std::endl;
-    std::cout << "Nacionalidade: " << novoPassageiro->nacionalidade << std::endl;
-    std::cout << std::endl;
-    */
 }
 
 
