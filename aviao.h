@@ -12,7 +12,6 @@ struct Aviao{
     std::string origem;
     std::string destino;
     int capacidade; // entre 5 e 15 (sempre cheios pag2 do encunciado)
-    //Falata o "Conjunto de passageiros"
     Aviao* proximoAviao; // Ponteiro para o proximo avião da lista ligada
     Passageiro* proximoPassageiro; //Ponteiro para o proximo passageiro da lista liaga
 };

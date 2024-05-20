@@ -1,6 +1,7 @@
 #include "simulacao.h"
 #include "aviao.h"
 #include "utils.h"
+#include "passageiros.h"
 
 
 void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
@@ -26,6 +27,31 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
 
     if (anterior != nullptr) {
         anterior->proximoAviao = nullptr;
+    }
+    chegadaPassageiros(listaPista);
+}
+
+void chegadaPassageiros(Aviao** listaPista){
+    if (*listaPista == nullptr) {
+        return;
+    }
+
+    Aviao* atual = *listaPista;
+    while (atual != nullptr) {
+        // Remover passageiros antigos
+        Passageiro* passageiroAtual = atual->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            Passageiro* temp = passageiroAtual;
+            passageiroAtual = passageiroAtual->next;
+            delete temp;
+        }
+        atual->proximoPassageiro = nullptr;
+
+        for (int i = 0; i < atual->capacidade; ++i) {
+            adicionarPassageiro(atual->proximoPassageiro);
+        }
+
+        atual = atual->proximoAviao;
     }
 }
 
