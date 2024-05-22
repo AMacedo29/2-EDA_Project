@@ -8,10 +8,8 @@
 #include "passageiros.h"
 #include "emergencias.h"
 
+
 void aeroportoMenu(){
-    Aviao* ListaAprox = nullptr;
-    Aviao* listaPista = nullptr;
-    Aviao* listaPartida = nullptr;
     addListaAprox(ListaAprox);
     imprimirListaAprox(ListaAprox);
     char escolha;
@@ -41,27 +39,22 @@ void aeroportoMenu(){
 
             if (countAvioes(ListaAprox) < 15 && aeroportoFechado == true) {
                 ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // gera avioes msm com o aeroporto fechado até ao max de 15 (pq ele so fica fechado ate 5 dias)
-            std::cout << "ola1" << std::endl;
             }
 
             if (countAvioes(ListaAprox) >= 11 && countAvioes(ListaAprox) <= 15 && aeroportoFechado == false ) {
                 ListaAprox = inserirAviaoAprox(&ListaAprox, ListaAprox); // quando o aeroporto volta a abrir a lista tem que receber avioes mesmo tendo passado do seu max
-                std::cout << "ola2" << std::endl;
             }
 
             if (countAvioes(ListaAprox) >= 11 && aeroportoFechado == false) {
                 moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaAprox tiver + de 10 avioes ela move +1 aviao para a prox lista até ela voltar ao seu max "normal"
-                std::cout << "ola3" << std::endl;
             }
 
             if (countAvioes(listaPista) >= 8 && aeroportoFechado == false) {
                 moverUltimoParaListaPartidas(&listaPista, &listaPartida); // vai +1 da listaPista para a listaPartida caso esteja com a capacidade max
-                std::cout << "ola4" << std::endl;
             }
 
             if (countAvioes(listaPartida) >= 6 && aeroportoFechado == false) {
                 removeUltimo(&listaPartida); // se a lista estiver mais do que cheia remove o ultimo aviao
-                std::cout << "ola5" << std::endl;
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,17 +65,14 @@ void aeroportoMenu(){
 
             if (countAvioes(listaPista) <= 7 && ListaAprox != nullptr && aeroportoFechado == false) {
                 moverUltimoParaListaPista(&ListaAprox, &listaPista); // se a listaPista tiver 7 ou menos avioes vem 1 aviao da ListaAprox
-                std::cout << "ola7" << std::endl;
             }
 
-            if (countAvioes(listaPista) >= 7 && aeroportoFechado == false) {
+            if (countAvioes(listaPista) > 7 && aeroportoFechado == false) {
                 moverUltimoParaListaPartidas(&listaPista, &listaPartida); // se a listaPista tiver 7 ou mais avioes move 1 aviao para a partida
-                std::cout << "ola8" << std::endl;
             }
 
             if (countAvioes(listaPartida) > 5) {
                 removeUltimo(&listaPartida); // se a lista estiver cheia remove o ultimo aviao
-                std::cout << "ola9" << std::endl;
             }
 
             imprimirListaAprox(ListaAprox);
@@ -126,6 +116,9 @@ void aeroportoMenu(){
     }while (!sair);
 }
 
+Aviao* ListaAprox = nullptr;
+Aviao* listaPista = nullptr;
+Aviao* listaPartida = nullptr;
 
 
 void addListaAprox(Aviao*& ListaAprox){
@@ -143,7 +136,6 @@ void addListaAprox(Aviao*& ListaAprox){
 
 
 void imprimirListaAprox(Aviao* ListaAprox){
-    std::cout << "(e)mergencias (o)pcoes (g)ravar" << std::endl;
     std::cout << "---------------" << std::endl;
     std::cout << "Em aproximacao" << std::endl;
     std::cout << "---------------" << std::endl;

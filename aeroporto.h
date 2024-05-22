@@ -13,5 +13,8 @@ void imprimirListaPartida(Aviao* listaPartida);
 
 void addListaAprox(Aviao*& ListaAprox);
 
+extern Aviao* ListaAprox;
+extern Aviao* listaPista;
+extern Aviao* listaPartida;
 
 #endif //INC_2_EDA_PROJECT_AEROPORTO_H

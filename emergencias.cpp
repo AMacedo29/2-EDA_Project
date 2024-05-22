@@ -1,5 +1,7 @@
 #include "emergencias.h"
 #include <iostream>
+#include "aviao.h"
+#include "aeroporto.h"
 
 void menuOpcoes(){
     char escolha;
@@ -17,7 +19,12 @@ void menuOpcoes(){
                 std::cout <<" Escolheu Pouso de emergencia" << std::endl;
                 break;
             case 'i':
-                std::cout <<" ainda n tem nada " << std::endl;
+                inverterPrioridade(ListaAprox);
+                inverterPrioridade(listaPista);
+                inverterPrioridade(listaPartida);
+                imprimirListaAprox(ListaAprox);
+                imprimirListaPista(listaPista);
+                imprimirListaPartida(listaPartida);
                 break;
             case 'b':
                 std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
@@ -73,4 +80,32 @@ void fecharAeroporto() {
     numeroDeDias = 5;
     diasRestantesAeroportoFechado = numeroDeDias;
     aeroportoFechado = true;
+}
+
+
+/**
+ * Inverte a ordem das listas ligadas
+ *
+ * @param head Referência para o ponteiro que aponta para o primeiro nó (cabeça) da lista ligada.
+ */
+void inverterLista(Aviao*& head) {
+    Aviao* anterior = nullptr;
+    Aviao* atual = head;
+    Aviao* proximo = nullptr;
+    while (atual != nullptr) {
+        proximo = atual->proximoAviao;
+        atual->proximoAviao = anterior;
+        anterior = atual;
+        atual = proximo;
+    }
+    head = anterior;
+}
+
+/**
+ * Inverte a ordem das listas ligadas
+ *
+ * @param listaPista Referência para o ponteiro que aponta para o primeiro nó (cabeça) da lista ligada.
+ */
+void inverterPrioridade(Aviao*& listaPista) {
+    inverterLista(listaPista);
 }
