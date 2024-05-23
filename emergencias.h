@@ -14,4 +14,6 @@ void inverterLista(Aviao*& head);
 
 void inverterPrioridade(Aviao*& listaPista);
 
+void pousoDeEmergencia();
+
 #endif //INC_2_EDA_PROJECT_EMERGENCIAS_H

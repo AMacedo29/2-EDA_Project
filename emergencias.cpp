@@ -2,6 +2,9 @@
 #include <iostream>
 #include "aviao.h"
 #include "aeroporto.h"
+#include "simulacao.h"
+#include "utils.h"
+
 
 void menuOpcoes(){
     char escolha;
@@ -49,9 +52,9 @@ int diasRestantesAeroportoFechado;
  * @param str É a string que vai ser verificada
  * @return false / true dependendo da verificação (se contem apenas digitos)
  */
-bool digito(const std::string& str) {
+bool digito(const std::string& str){
     for (char digito : str) {
-        if (!isdigit(digito)) {
+        if (!isdigit(digito)){
             return false;
         }
     }
@@ -61,7 +64,7 @@ bool digito(const std::string& str) {
 /**
  * Serve para fechar o aeroporto por X dias
  */
-void fecharAeroporto() {
+void fecharAeroporto(){
     std::string input;
     int numeroDeDias;
     std::cout << "Digite o numero de dias que o aeroporto ficara fechado: ";
@@ -88,7 +91,7 @@ void fecharAeroporto() {
  *
  * @param head Referência para o ponteiro que aponta para o primeiro nó (cabeça) da lista ligada.
  */
-void inverterLista(Aviao*& head) {
+void inverterLista(Aviao*& head){
     Aviao* anterior = nullptr;
     Aviao* atual = head;
     Aviao* proximo = nullptr;
@@ -106,6 +109,58 @@ void inverterLista(Aviao*& head) {
  *
  * @param listaPista Referência para o ponteiro que aponta para o primeiro nó (cabeça) da lista ligada.
  */
-void inverterPrioridade(Aviao*& listaPista) {
+void inverterPrioridade(Aviao*& listaPista){
     inverterLista(listaPista);
+}
+
+
+void pousoDeEmergencia(){
+    std::cout << "Emergencia! " << std::endl;
+    ListaAprox = inserirAviaoAproxEmergencia(&ListaAprox, ListaAprox);
+    imprimirListaAprox(ListaAprox);
+    imprimirListaPista(listaPista);
+    imprimirListaPartida(listaPartida);
+
+    std::string emerVoo;
+    std::string emerModelo;
+    std::cout << "Digite o Voo de emergencia:" << std::endl;
+    std::cin >> emerVoo;
+    std::cout << "Digite o Modelo de emergencia: " << std::endl;
+    std::cin >> emerModelo;
+
+    if (countAvioes(listaPista) < 7){
+        // Move o avião de emergencia para a pista se tiver espaço
+        moverAviao(&ListaAprox, &listaPista, emerVoo, emerModelo);
+    } else { // se não tiver espaço suficiente na listaPista
+        std::string VooPista;
+        std::string ModeloPista;
+        std::cout << "Digite o Voo a ser movido da Pista para Partida: " << std::endl;
+        std::cin >> VooPista;
+        std::cout << "Digite o Modelo a ser movido da Pista para Partida: " << std::endl;
+        std::cin >> ModeloPista;
+        moverAviao(&listaPista, &listaPartida, VooPista, ModeloPista);
+        moverAviao(&ListaAprox, &listaPista, emerVoo, emerModelo);
+    }
+    if (countAvioes(listaPartida) >=5){
+        std::string nomeVoo;
+        std::string modeloAviao;
+        std::cout << "Digite o Voo a ser movido da Partida: " << std::endl;
+        std::cin >> nomeVoo;
+        std::cout << "Digite o Modelo a ser movido da Partida" << std::endl;
+        std::cin >> modeloAviao;
+        removerAviao(&listaPartida,nomeVoo,modeloAviao);
+    }
+    // Atualizar origem e destino do avião de emergência na listaPista
+    Aviao* atual = listaPista;
+    while (atual) {
+        if (atual->nomeVoo == emerVoo && atual->modeloAviao == emerModelo) {
+            atual->destino = getRandomDestino();
+            atual->origem = "Aeroporto EDA";
+            break;
+        }
+        atual = atual->proximoAviao;
+    }
+    imprimirListaAprox(ListaAprox);
+    imprimirListaPista(listaPista);
+    imprimirListaPartida(listaPartida);
 }

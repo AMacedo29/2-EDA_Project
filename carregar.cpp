@@ -51,10 +51,11 @@ void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
         novoAviaoPonteiro->origem = origem;
         novoAviaoPonteiro->destino = destino;
         novoAviaoPonteiro->capacidade = capacidade;
-/* //dar fix dps
+
         // Carregar passageiros
-        std::string numeroDoBilhete, primeiroNome, segundoNome, nacionalidade;
-        while (std::getline(arquivo, numeroDoBilhete) &&
+        std::string dummy, numeroDoBilhete, primeiroNome, segundoNome, nacionalidade;
+        while (std::getline(arquivo, dummy) &&
+               std::getline(arquivo, numeroDoBilhete) &&
                std::getline(arquivo, primeiroNome) &&
                std::getline(arquivo, segundoNome) &&
                std::getline(arquivo, nacionalidade)) {
@@ -66,7 +67,7 @@ void carregarLista(Aviao*& lista, const std::string& nomeArquivo) {
             novoPassageiro->next = novoAviaoPonteiro->proximoPassageiro;
             novoAviaoPonteiro->proximoPassageiro  = novoPassageiro;
         }
-*/
+
         novoAviaoPonteiro->proximoAviao = listaTemp;
         listaTemp = novoAviaoPonteiro;
     }

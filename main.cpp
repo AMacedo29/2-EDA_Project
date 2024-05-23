@@ -13,5 +13,6 @@ int main(){
 }
 
 
-//TODO:Por a função "Carregar" a funcionar
-//TODO:falta o 3.3 / 3.5 / 5
+//Tiago TODO: 3.5 (passageiros)
+
+// Kamaxo363 TODO: 5 e dar fix no carregar

@@ -21,5 +21,12 @@ Aviao* novoAviao();
 
 Aviao* inserirAviaoAprox(Aviao** aNodo, Aviao* &ListaAprox);
 
+Aviao* novoAviaoEmergencia();
+
+Aviao* inserirAviaoAproxEmergencia(Aviao** aNodo, Aviao* &ListaAprox);
+
+void moverAviao(Aviao** origem, Aviao** destino, const std::string& nomeVoo, const std::string& modeloAviao);
+
+void removerAviao(Aviao** lista, const std::string& nomeVoo, const std::string& modeloAviao);
 
 #endif //INC_2_EDA_PROJECT_AVIAO_H

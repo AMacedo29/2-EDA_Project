@@ -18,12 +18,12 @@ void aeroportoMenu(){
     do{
         std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte (c)arregar" << std::endl;
         std::cin >> escolha;
-        //Convertendo a escolha para minusculas
+        //Converte a escolha para minusculas
         escolha = tolower(escolha);
 
     switch(escolha) {
         case 'e':
-            std::cout <<" ainda n tem nada " << std::endl;
+            pousoDeEmergencia();
             break;
         case 'o':
             menuOpcoes();
