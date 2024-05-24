@@ -80,33 +80,62 @@ Aviao* inserirAviaoAproxEmergencia(Aviao** aNodo, Aviao* &ListaAprox) {
 /**
  * Move um aviao de uma lista para outra lista.
  *
- * @param origem Ponteiro para o ponteiro da lista de onde o aviao será removido.
- * @param destino Ponteiro para o ponteiro da lista para onde o aviao será movido.
+ * @param listaDeOrigem Ponteiro para o ponteiro da lista de onde o aviao será removido.
+ * @param listaDeDestino Ponteiro para o ponteiro da lista para onde o aviao será movido.
  * @param nomeVoo Nome do voo do aviao a ser movido.
  * @param modeloAviao Modelo do aviao a ser movido.
  */
-void moverAviao(Aviao** origem, Aviao** destino, const std::string& nomeVoo, const std::string& modeloAviao) {
+void moverAviao(Aviao** listaDeOrigem, Aviao** listaDeDestino, const std::string& nomeVoo, const std::string& modeloAviao) {
     Aviao* anterior = nullptr;
-    Aviao* atual = *origem;
+    Aviao* atual = *listaDeOrigem;
 
-    while (atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)) {
+    while (atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)){
         anterior = atual;
         atual = atual->proximoAviao;
     }
-    if (atual) {
-        if (anterior) {
-            anterior->proximoAviao = atual->proximoAviao;
-        } else {
-            *origem = atual->proximoAviao;
+    if (atual){
+        if (anterior){
+            anterior -> proximoAviao = atual -> proximoAviao;
+        }else{
+            *listaDeOrigem = atual -> proximoAviao;
         }
 
-        atual->proximoAviao = *destino;
-        *destino = atual;
-    } else {
-        std::cout << "Aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " nao foi encontrado na lista." << std::endl;
+        atual -> proximoAviao = *listaDeDestino;
+        *listaDeDestino = atual;
+    } else{
+        std::cout << "O aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " nao foi encontrado na lista." << std::endl;
     }
 }
 
+
+/**
+ * Move um aviao de uma lista para outra lista.
+ *
+ * @param listaDeOrigem Ponteiro para o ponteiro da lista de onde o aviao será removido.
+ * @param listaDeDestino Ponteiro para o ponteiro da lista para onde o aviao será movido.
+ * @param emergencia É o destino do aviao de emergencia
+ */
+void moverAviaoEmergencia(Aviao** listaDeOrigem, Aviao** listaDeDestino ,const std::string& emergencia){
+    Aviao* anterior = nullptr;
+    Aviao* atual = *listaDeOrigem;
+
+    while (atual && !(atual->destino == emergencia)){
+        anterior = atual;
+        atual = atual->proximoAviao;
+    }
+    if (atual){
+        if (anterior){
+            anterior -> proximoAviao = atual -> proximoAviao;
+        }else{
+            *listaDeOrigem = atual -> proximoAviao;
+        }
+
+        atual -> proximoAviao = *listaDeDestino;
+        *listaDeDestino = atual;
+    } else{
+        std::cout << "O aviao com o destino " << emergencia <<" nao foi encontrado na lista." << std::endl;
+    }
+}
 
 /**
  * Remove um avião de uma lista.

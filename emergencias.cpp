@@ -112,7 +112,7 @@ void inverterLista(Aviao*& head){
 void inverterPrioridade(Aviao*& listaPista){
     inverterLista(listaPista);
 }
-
+//moverAviaoEmergencia(&ListaAprox,&listaPista,"Aeroporto EDA Emergencia");
 
 void pousoDeEmergencia(){
     std::cout << "Emergencia! " << std::endl;
@@ -121,16 +121,9 @@ void pousoDeEmergencia(){
     imprimirListaPista(listaPista);
     imprimirListaPartida(listaPartida);
 
-    std::string emerVoo;
-    std::string emerModelo;
-    std::cout << "Digite o Voo de emergencia:" << std::endl;
-    std::cin >> emerVoo;
-    std::cout << "Digite o Modelo de emergencia: " << std::endl;
-    std::cin >> emerModelo;
-
     if (countAvioes(listaPista) < 7){
         // Move o avião de emergencia para a pista se tiver espaço
-        moverAviao(&ListaAprox, &listaPista, emerVoo, emerModelo);
+        moverAviaoEmergencia(&ListaAprox, &listaPista, "Aeroporto EDA Emergencia");
     } else { // se não tiver espaço suficiente na listaPista
         std::string VooPista;
         std::string ModeloPista;
@@ -139,7 +132,7 @@ void pousoDeEmergencia(){
         std::cout << "Digite o Modelo a ser movido da Pista para Partida: " << std::endl;
         std::cin >> ModeloPista;
         moverAviao(&listaPista, &listaPartida, VooPista, ModeloPista);
-        moverAviao(&ListaAprox, &listaPista, emerVoo, emerModelo);
+        moverAviaoEmergencia(&ListaAprox, &listaPista, "Aeroporto EDA Emergencia");
     }
     if (countAvioes(listaPartida) >=5){
         std::string nomeVoo;
@@ -152,10 +145,10 @@ void pousoDeEmergencia(){
     }
     // Atualizar origem e destino do avião de emergência na listaPista
     Aviao* atual = listaPista;
-    while (atual) {
-        if (atual->nomeVoo == emerVoo && atual->modeloAviao == emerModelo) {
-            atual->destino = getRandomDestino();
-            atual->origem = "Aeroporto EDA";
+    while(atual){
+        if (atual -> destino == "Aeroporto EDA Emergencia") {
+            atual -> destino = getRandomDestino();
+            atual -> origem = "Aeroporto EDA";
             break;
         }
         atual = atual->proximoAviao;
