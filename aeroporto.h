@@ -11,7 +11,7 @@ void menuNacionalidades();
 
 void mostrarpassageirosordenados(Aviao* listaPista);
 
-void pesquisarpassageiropista(Aviao* listaPista);
+void pesquisarpassageiro(Aviao* listaPista, Aviao* listaAprox);
 
 void mostrarpassageiros(Aviao* listaPista);
 
