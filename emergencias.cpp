@@ -10,7 +10,7 @@ void menuOpcoes(){
     char escolha;
     bool sair = false;
     do {
-        std::cout << "Digite a sua escolha (f)echar_aeroporto (p)ouso_de_mergencia (i)nverter_prioridade (b)sair" << std::endl;
+        std::cout << "Digite a sua escolha (f)echar_aeroporto (p)ouso_de_mergencia (i)nverter_prioridade (n)Passageiros (b)sair" << std::endl;
         std::cin >> escolha;
         //Converte a escolha para minusculas
         escolha = tolower(escolha);
@@ -28,6 +28,9 @@ void menuOpcoes(){
                 imprimirListaAprox(ListaAprox);
                 imprimirListaPista(listaPista);
                 imprimirListaPartida(listaPartida);
+                break;
+            case 'n':
+                menuNacionalidades();
                 break;
             case 'b':
                 std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;

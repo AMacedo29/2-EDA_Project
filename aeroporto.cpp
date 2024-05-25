@@ -79,6 +79,7 @@ void aeroportoMenu(){
             imprimirListaPista(listaPista);
             imprimirListaPartida(listaPartida);
 
+
             if (aeroportoFechado == true) {
                 if (diasRestantesAeroportoFechado -1  > 0) { // ele estava a fechar por 1 dia a mais
                     --diasRestantesAeroportoFechado;
@@ -115,6 +116,45 @@ void aeroportoMenu(){
         }
     }while (!sair);
 }
+
+void menuNacionalidades(){
+    char escolha;
+    bool sair = false;
+    do {
+        std::cout << " Digite a sua escolha " << std::endl;
+        std::cout << "(a) - Mostrar passageiros" << std::endl;
+        std::cout << "(s) - Mostrar passageiros ordenados" << std::endl;
+        std::cout << "(d) - Pesquisar passageiros" << std::endl;
+        std::cout << "(f) - Editar passageiros" << std::endl;
+        std::cout << "(b) - Sair" << std::endl;
+        std::cin >> escolha;
+        //Converte a escolha para minusculas
+        escolha = tolower(escolha);
+        switch(escolha){
+            case 'a':
+                mostrarpassageiros(listaPista);
+                break;
+            case's':
+                mostrarpassageirosordenados(listaPista);
+                break;
+            case 'd':
+                pesquisarpassageiro(listaPista);
+                break;
+            case 'f':
+                std::cout << "(f) - Editar passageiros" << std::endl;
+                break;
+            case 'b':
+                std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
+                std::cout << " \n";
+                sair = true;
+                return;
+            default:
+                break;
+        }
+    }while (!sair);
+}
+
+
 
 Aviao* ListaAprox = nullptr;
 Aviao* listaPista = nullptr;
@@ -215,5 +255,72 @@ void imprimirListaPartida(Aviao* listaPartida){
         std::cout << std::endl;
         listaPartida = listaPartida->proximoAviao;
         std::cout << " " << std::endl; // É para dar espaço entre os aviões
+    }
+}
+
+// Função para mostrar passageiros
+// Falta criar uma função para ordenar os passageiros por nacionalidade;
+
+void mostrarpassageirosordenados(Aviao* listaPista) {
+    while (listaPista != nullptr) {
+        std::cout << "Passageiros: ";
+        Passageiro* passageiroAtual = listaPista->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            std::cout << "Numero de Bilhete: " << passageiroAtual->numeroDoBilhete << std::endl;
+            std::cout << "Nome: " << passageiroAtual->primeiroNome << " " << passageiroAtual->segundoNome << std::endl;
+            std::cout << "Nacionalidade: " << passageiroAtual->nacionalidade << std::endl;
+            if (passageiroAtual->next != nullptr) {
+                std::cout << ", ";
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+
+        std::cout << std::endl;
+        listaPista = listaPista->proximoAviao;
+        std::cout << std::endl; // Linha em branco para separar os aviões
+    }
+}
+
+
+// Função para mostrar passageiros
+void mostrarpassageiros(Aviao* listaPista) {
+    while (listaPista != nullptr) {
+        std::cout << "Passageiros do Voo-> " << listaPista->nomeVoo << std::endl;
+        Passageiro* passageiroAtual = listaPista->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+
+            std::cout << "Numero de Bilhete: " << passageiroAtual->numeroDoBilhete << std::endl;
+            std::cout << "Nome: " << passageiroAtual->primeiroNome << " " << passageiroAtual->segundoNome << std::endl;
+            std::cout << "Nacionalidade: " << passageiroAtual->nacionalidade << std::endl;
+            if (passageiroAtual->next != nullptr) {
+                std::cout << std::endl;
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+
+        std::cout << std::endl;
+        listaPista = listaPista->proximoAviao;
+        std::cout << std::endl;
+    }
+}
+
+void pesquisarpassageiro(Aviao* listaPista){
+    std::string primNome;
+    std::cout << "Digite o primeiro nome do passageiro" << std::endl;
+    std::cin >> primNome;
+    while (listaPista != nullptr) {
+        std::cout << "Passageiros do Voo-> " << listaPista->nomeVoo << std::endl;
+        Passageiro* passageiroAtual = listaPista->proximoPassageiro;
+        while (passageiroAtual != nullptr ) {
+            if (primNome == passageiroAtual->primeiroNome){
+                std::cout << "Numero de Bilhete: " << passageiroAtual->numeroDoBilhete << std::endl;
+                std::cout << "Nome: " << passageiroAtual->primeiroNome << " " << passageiroAtual->segundoNome << std::endl;
+                std::cout << "Nacionalidade: " << passageiroAtual->nacionalidade << std::endl;
+            }
+            passageiroAtual = passageiroAtual->next;
+        }
+        std::cout << std::endl;
+        listaPista = listaPista->proximoAviao;
+        std::cout << std::endl;
     }
 }
