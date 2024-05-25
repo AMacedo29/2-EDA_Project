@@ -31,6 +31,20 @@ void moverUltimoParaListaPista(Aviao** ListaAprox, Aviao** listaPista) {
     chegadaPassageiros(listaPista);
 }
 
+void inserirPassageirosNaArvoreDeNacionalidades(Aviao* aviao) {
+    if (aviao == nullptr || aviao->proximoPassageiro == nullptr) {
+        return;
+    }
+
+    Passageiro* passageiroAtual = aviao->proximoPassageiro;
+    Passageiro* nacionalidades = listaNacionalidades(aviao->proximoPassageiro);
+    while (passageiroAtual != nullptr) {
+        Passageiro* passageiroParaInserir = new Passageiro(*passageiroAtual);
+        inserirPassageiroNaListaNacionalidades(nacionalidades, passageiroParaInserir);
+        passageiroAtual = passageiroAtual->next;
+    }
+}
+
 void chegadaPassageiros(Aviao** listaPista){
     if (*listaPista == nullptr) {
         return;

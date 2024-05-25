@@ -28,6 +28,8 @@ void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro);
 
 void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Passageiro* passageiro);
 
+void imprimeArvore(Passageiro* no, int nivel);
+
 Passageiro* removerCopia(Passageiro* raiz, Passageiro* no, Passageiro* ant);
 
 Passageiro* removerCopia(Passageiro* raiz, int num);

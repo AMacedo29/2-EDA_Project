@@ -54,7 +54,6 @@ int contarPassageiros(Aviao* aviao) {
  * @param aviao Ponteiro para o avião em que o passageiro será inserido
  */
 void adicionarPassageiro(Passageiro*& proximoPassageiro) {
-    // Cria um novo passageiro
     Passageiro* novoPassageiro = new Passageiro;
     novoPassageiro->numeroDoBilhete = gerarBilheteAleatorio();
     novoPassageiro->primeiroNome = getRandomPrimeiroNome();
@@ -62,11 +61,10 @@ void adicionarPassageiro(Passageiro*& proximoPassageiro) {
     novoPassageiro->nacionalidade = getRandomNacionalidade();
     novoPassageiro->next = nullptr;
 
-    // Se a lista estiver vazia, o novo passageiro será o primeiro
     if (proximoPassageiro == nullptr) {
         proximoPassageiro = novoPassageiro;
     } else {
-        // Caso contrário, vai até ao último passageiro e adicione o novo passageiro lá
+
         Passageiro* ultimoPassageiro = proximoPassageiro;
         while (ultimoPassageiro->next != nullptr) {
             ultimoPassageiro = ultimoPassageiro->next;
@@ -82,7 +80,6 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
     while (atual != nullptr) {
         std::string novaNacionalidade = getRandomNacionalidade();
 
-        // Verifica se a nacionalidade já está na lista
         Passageiro* temp = nacionalidades;
         bool existe = false;
         while (temp != nullptr) {
@@ -93,7 +90,6 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
             temp = temp->next;
         }
 
-        // Adiciona a nova nacionalidade se não estiver na listas
         if (!existe) {
             Passageiro* novo = new Passageiro;
             novo->nacionalidade = novaNacionalidade;
@@ -107,19 +103,17 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
     return nacionalidades;
 }
 
+
 void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Passageiro* passageiro) {
-    // Verifica se a nacionalidade já está na lista
     Passageiro* temp = listaNacionalidades;
     while (temp != nullptr) {
         if (temp->nacionalidade == passageiro->nacionalidade) {
-            // Insere o passageiro na árvore de passageiros correspondente
             inserirPassageiroNaArvore(temp->esq, passageiro);
             return;
         }
         temp = temp->next;
     }
 
-    // Se a nacionalidade não estiver na lista, cria um novo nó na lista
     Passageiro* novoNo = new Passageiro;
     novoNo->nacionalidade = passageiro->nacionalidade;
     novoNo->esq = nullptr;
@@ -127,11 +121,10 @@ void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Pa
     novoNo->next = listaNacionalidades;
     listaNacionalidades = novoNo;
 
-    // Insere o passageiro na árvore de passageiros correspondente
     inserirPassageiroNaArvore(novoNo->esq, passageiro);
 }
 
-// Função para inserir passageiros em uma árvore de pesquisa binária
+
 void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro) {
     if (no == nullptr) {
         no = passageiro;
@@ -142,6 +135,20 @@ void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro) {
             inserirPassageiroNaArvore(no->dir, passageiro);
         }
     }
+}
+
+void imprimeArvore(Passageiro* no, int nivel) {
+    if (no == nullptr) {
+        std::cout << std::endl;
+        return;
+    }
+
+    imprimeArvore(no->dir, nivel + 1);
+    for (int i = 0; i < nivel; i++) {
+        std::cout << "\t";
+    }
+    std::cout << no->primeiroNome << " " << no->segundoNome << " (" << no->nacionalidade << ")" << std::endl;
+    imprimeArvore(no->esq, nivel + 1);
 }
 
 

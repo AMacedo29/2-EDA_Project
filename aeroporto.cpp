@@ -16,12 +16,21 @@ void aeroportoMenu(){
     bool sair = false;
 
     do{
-        std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte (c)arregar" << std::endl;
+        std::cout << "Digite a sua escolha (e)mergencias (o)pcoes (g)ravar (s)eguinte (c)arregar (l)arvore" << std::endl;
         std::cin >> escolha;
         //Converte a escolha para minusculas
         escolha = tolower(escolha);
 
     switch(escolha) {
+        case 'l':{
+            Aviao* aviao = new Aviao();
+            std::cout << "Arvore com chegada de estrangeiros" << std::endl;
+            Passageiro* raiz = nullptr;
+            Passageiro* listaNacionalidades = nullptr;
+            inserirPassageirosNaArvoreDeNacionalidades(aviao);
+            imprimeArvore(raiz, 0);
+            break;
+            }
         case 'e':
             pousoDeEmergencia();
             break;

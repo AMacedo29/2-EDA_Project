@@ -7,6 +7,7 @@ int countAvioes(Aviao* lista);
 void moverUltimoParaListaPartidas(Aviao** listaPista, Aviao** listaPartida);
 void removeUltimo(Aviao** lista);
 void chegadaPassageiros(Aviao** listaPista);
+void inserirPassageirosNaArvoreDeNacionalidades(Aviao* aviao);
 
 
 
