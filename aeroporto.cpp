@@ -260,11 +260,17 @@ void imprimirListaPartida(Aviao* listaPartida){
 // Função para mostrar passageiros
 // Falta criar uma função para ordenar os passageiros por nacionalidade;
 
-
+/**
+ *
+ * @param listaPista - Ponteiro para lista de Pista
+ * Explicação: Nesta função ele recebe a lista e mostra todas as nacionalidades que estam nos aviões de partida
+ * É uma função de auxilio para inserir a nacionalidade na função editarnacionalidade();
+ * Nota: Ela duplica nacionalidade se houver a mesma nacionalidade em outro aviões!
+ * Quando é apenas um funciona bem
+ */
 void mostrarlistadenacionalidades(Aviao* listaPista){
     std::string primnacionalidade;
     bool primeiraNacionalidade = true;
-
     std::cout << "Nacionalidades:" << std::endl;
     while (listaPista != nullptr){
         Passageiro* passageiroAtual = listaPista->proximoPassageiro;
@@ -294,7 +300,12 @@ void mostrarlistadenacionalidades(Aviao* listaPista){
         listaPista = listaPista->proximoAviao;
     }
 }
-
+/**
+ *
+ * @param listaPista - Ponteiro para lista de Pista
+ * Explicação: Nesta função é pedida para inserir a nacionalidade e depois mostra todos os passageiros com essa nacionalidade
+ * Nota: Não mostra por ordem alfabética
+ */
 void mostrarpassageirosordenados(Aviao* listaPista) {
     std::string nacionalidade;
     mostrarlistadenacionalidades(listaPista);
@@ -319,9 +330,11 @@ void mostrarpassageirosordenados(Aviao* listaPista) {
 }
 
 
-
-
-// Função para mostrar passageiros
+/**
+ *
+ * @param listaPista - Ponteiro para lista de Pista
+ * Explicação: Mostra todos os passageiros dos aviões que se encontram na pista
+ */
 void mostrarpassageiros(Aviao* listaPista) {
     while (listaPista != nullptr) {
         std::cout << "Passageiros do Voo-> " << listaPista->nomeVoo << std::endl;
@@ -340,7 +353,14 @@ void mostrarpassageiros(Aviao* listaPista) {
         std::cout << std::endl;
     }
 }
-
+/**
+ *
+ * @param listaPista - Ponteiro para lista de Pista
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
+ * Explicação: É pedido ao utilizador para inserir apenas o primeiro nome do passageeiros
+ * e mostra todos os passageiros com esse nome, quer nos aviões que estam na zona de chegada ou na zona
+ * de partida. Se não encontrar é enviado uma mensagem Passageiro nao encontrado
+ */
 void pesquisarpassageiro(Aviao* listaPista, Aviao* listaAprox) {
     std::string primNome;
     std::cout << "Digite o primeiro nome do passageiro: ";
@@ -390,7 +410,7 @@ void pesquisarpassageiro(Aviao* listaPista, Aviao* listaAprox) {
 }
 /**
  *
- * @param listaAprox - Ponteiro para lista e Aproximação(chegada)
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
  * @param numVoo - Recebe o nome do voo
  * Explicação: Nesta função ele mostra todos os passageiros de um expecífico voo
  * inserido pelo utilizador
@@ -421,9 +441,11 @@ void mostrarPassageiroVoo(Aviao* listaAprox, std::string numVoo) {
 }
 /**
  *
- * @param listaAprox - Ponteiro para lista e Aproximação(chegada)
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
  * @param numVoo - Recebe o nome do voo
  * @return - Vai retornar True ou False
+ * Explicação: Recebe a lista e o nome do voo, e faz uma verificação se ela existe, se existir retorna
+ * true, senão retorna false
  */
 bool validarNumeroVoo(Aviao* listaAprox, std::string numVoo){
     while (listaAprox != nullptr){
@@ -434,7 +456,15 @@ bool validarNumeroVoo(Aviao* listaAprox, std::string numVoo){
     }
     return false;
 }
-
+/**
+ *
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
+ * @param primNome - Recebe o primeiro nome do passageiro
+ * @param nomeVoo - Recebe o nome do voo
+ * @return - Vai retornar True ou False
+ * Explicação: Recebe a lista, o primeiro nome e nome do voo, e faz uma verifcação se o primeiro nome consta
+ * no avião, se houver retorna true, senão retorna false
+ */
 bool validarprimNome(Aviao* listaAprox, std::string& primNome, std::string& nomeVoo) {
 
     while (listaAprox != nullptr) {
@@ -455,7 +485,15 @@ bool validarprimNome(Aviao* listaAprox, std::string& primNome, std::string& nome
     }
     return false;
 }
-
+/**
+ *
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
+ * @param segNome - Recebe o primeiro nome do passageiro
+ * @param nomeVoo - Recebe o nome do voo
+ * @return - Vai retornar True ou False
+ * Explicação: Recebe a lista, o segundo nome e nome do voo, e faz uma verifcação se o segundo nome consta
+ * no avião, se houver retorna true, senão retorna false
+ */
 bool validarsegNome(Aviao* listaAprox, std::string& segNome, std::string& nomeVoo) {
 
     while (listaAprox != nullptr) {
@@ -476,7 +514,12 @@ bool validarsegNome(Aviao* listaAprox, std::string& segNome, std::string& nomeVo
     }
     return false;
 }
-
+/**
+ *
+ * @param listaAprox - Ponteiro para lista de Aproximação(chegada)
+ * Explicação: Recebe a lista, permite ao utilizador ir procurar pelo numero, o primeiro e segundo nome do passageiro,
+ * faz verificações, depois pede para inserir uma nova nacionalidade e atualiza a nacionalidade do passageiro
+ */
 void editarnacionalidade(Aviao* listaAprox){
     std::string numerovoo;
     std::string primNome;
@@ -513,7 +556,7 @@ void editarnacionalidade(Aviao* listaAprox){
     while (listaAprox != nullptr){
         Passageiro* passageirochegada = listaAprox->proximoPassageiro;
         while (passageirochegada != nullptr){
-            if(passageirochegada->primeiroNome == primNome && listaAprox->nomeVoo == numerovoo){
+            if(passageirochegada->primeiroNome == primNome && passageirochegada->segundoNome == segNome && listaAprox->nomeVoo == numerovoo){
                 std::cout << "Insira a nova nacionalidade para " << passageirochegada->primeiroNome << " " << passageirochegada->segundoNome << ":" << std::endl;
                 std::cin >> novaNacionalidade;
                 passageirochegada->nacionalidade = novaNacionalidade;
@@ -532,7 +575,8 @@ void editarnacionalidade(Aviao* listaAprox){
 
 //BST para Passageiro da Pista
 /*
-Passageiro* criarNovoPassageiro(const std::string& numeroDoBilhete, const std::string& primeiroNome, const std::string& segundoNome, const std::string& nacionalidade) {
+
+ Passageiro* criarNovoPassageiro(const std::string& numeroDoBilhete, const std::string& primeiroNome, const std::string& segundoNome, const std::string& nacionalidade) {
     Passageiro* novoPassageiro = new Passageiro();
     novoPassageiro->numeroDoBilhete = numeroDoBilhete;
     novoPassageiro->primeiroNome = primeiroNome;
