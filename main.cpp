@@ -12,7 +12,4 @@ int main(){
     return 0;
 }
 
-
-//Tiago TODO: 3.5 (passageiros)
-
-// Kamaxo363 TODO: 5 e dar fix no carregar
+////////////////////////////////////////// O menu do 5 está dentro das opçoes //////////////////////////////////////////
