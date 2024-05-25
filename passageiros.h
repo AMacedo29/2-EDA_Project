@@ -24,6 +24,10 @@ void adicionarPassageiro(Passageiro*& proximoPassageiro);
 
 Passageiro* listaNacionalidades(Passageiro*& passageiro);
 
+void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro);
+
+void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Passageiro* passageiro);
+
 Passageiro* removerCopia(Passageiro* raiz, Passageiro* no, Passageiro* ant);
 
 Passageiro* removerCopia(Passageiro* raiz, int num);

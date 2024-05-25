@@ -93,7 +93,7 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
             temp = temp->next;
         }
 
-        // Adiciona a nova nacionalidade se não estiver na lista
+        // Adiciona a nova nacionalidade se não estiver na listas
         if (!existe) {
             Passageiro* novo = new Passageiro;
             novo->nacionalidade = novaNacionalidade;
@@ -106,6 +106,44 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
 
     return nacionalidades;
 }
+
+void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Passageiro* passageiro) {
+    // Verifica se a nacionalidade já está na lista
+    Passageiro* temp = listaNacionalidades;
+    while (temp != nullptr) {
+        if (temp->nacionalidade == passageiro->nacionalidade) {
+            // Insere o passageiro na árvore de passageiros correspondente
+            inserirPassageiroNaArvore(temp->esq, passageiro);
+            return;
+        }
+        temp = temp->next;
+    }
+
+    // Se a nacionalidade não estiver na lista, cria um novo nó na lista
+    Passageiro* novoNo = new Passageiro;
+    novoNo->nacionalidade = passageiro->nacionalidade;
+    novoNo->esq = nullptr;
+    novoNo->dir = nullptr;
+    novoNo->next = listaNacionalidades;
+    listaNacionalidades = novoNo;
+
+    // Insere o passageiro na árvore de passageiros correspondente
+    inserirPassageiroNaArvore(novoNo->esq, passageiro);
+}
+
+// Função para inserir passageiros em uma árvore de pesquisa binária
+void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro) {
+    if (no == nullptr) {
+        no = passageiro;
+    } else {
+        if (passageiro->primeiroNome < no->primeiroNome) {
+            inserirPassageiroNaArvore(no->esq, passageiro);
+        } else {
+            inserirPassageiroNaArvore(no->dir, passageiro);
+        }
+    }
+}
+
 
 /*
 Passageiro* removerCopia(Passageiro* raiz, int num) {
