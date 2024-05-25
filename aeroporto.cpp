@@ -172,6 +172,11 @@ Aviao* listaPista = nullptr;
 Aviao* listaPartida = nullptr;
 
 
+/**
+ * Adiciona 10 avioes à lista de chegada(ListaAprox).
+ *
+ * @param ListaAprox Referencia para a ListaAprox.
+ */
 void addListaAprox(Aviao*& ListaAprox){
     srand(time(nullptr));
     if (ListaAprox == nullptr) {
@@ -182,7 +187,13 @@ void addListaAprox(Aviao*& ListaAprox){
 }
 
 
-
+/**
+ * Imprime os aviões em aproximação.
+ *
+ * @param ListaAprox Ponteiro para o início da lista de aviões em aproximação.
+ * Se a lista estiver vazia, nenhum avião será impresso.
+ * Cada avião é impresso com seu nome de voo, modelo, origem, destino e os nomes dos seus passageiros.
+ */
 void imprimirListaAprox(Aviao* ListaAprox){
     std::cout << "---------------" << std::endl;
     std::cout << "Em aproximacao" << std::endl;
@@ -212,6 +223,13 @@ void imprimirListaAprox(Aviao* ListaAprox){
     }
 }
 
+/**
+ * Imprime os aviões em pista.
+ *
+ * @param listaPista Ponteiro para o início da lista de aviões na pista.
+ * Se a lista estiver vazia, nenhum avião será impresso.
+ * Cada avião é impresso com seu nome de voo, modelo, origem, destino e os nomes dos seus passageiros.
+ */
 void imprimirListaPista(Aviao* listaPista){
     std::cout << "---------------" << std::endl;
     std::cout << "Na pista" << std::endl;
@@ -239,6 +257,13 @@ void imprimirListaPista(Aviao* listaPista){
     }
 }
 
+/**
+ * Imprime os aviões na lista de partida.
+ *
+ * @param listaPartida Ponteiro para o início da lista de aviões de partida.
+ * Se a lista estiver vazia, nenhum avião será impresso.
+ * Cada avião é impresso com seu nome de voo, modelo, origem, destino e os nomes dos seus passageiros.
+ */
 void imprimirListaPartida(Aviao* listaPartida){
     std::cout << "---------------" << std::endl;
     std::cout << "A descolar" << std::endl;

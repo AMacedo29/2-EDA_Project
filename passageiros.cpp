@@ -73,6 +73,14 @@ void adicionarPassageiro(Passageiro*& proximoPassageiro) {
     }
 }
 
+/**
+ * Cria uma lista ligada de nacionalidades a partir da lista ligada de passageiros.
+ *
+ * @param passageiro Ponteiro para o início da lista ligada de passageiros.
+ * A função percorre esta lista para extrair as nacionalidades dos passageiros.
+ * @return Ponteiro para o início da lista de nacionalidades.
+ * Cada nó da lista de nacionalidades contém uma nacionalidade única encontrada na lista de passageiros.
+ */
 Passageiro* listaNacionalidades(Passageiro*& passageiro) {
     Passageiro* nacionalidades = nullptr;
     Passageiro* atual = passageiro;
@@ -103,7 +111,15 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
     return nacionalidades;
 }
 
-
+/**
+ * Insere um passageiro na lista de nacionalidades ou em sua árvore de passageiros associada.
+ *
+ * @param listaNacionalidades Ponteiro para o início da lista de nacionalidades.
+ * A função percorre esta lista para encontrar a nacionalidade do passageiro.
+ * Se a nacionalidade já existir na lista, o passageiro é inserido na árvore de passageiros associada.
+ * Caso contrário, uma nova entrada é criada na lista de nacionalidades e o passageiro é inserido em sua árvore de passageiros.
+ * @param passageiro Ponteiro para o passageiro a ser inserido na lista de nacionalidades ou em sua árvore de passageiros associada.
+ */
 void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Passageiro* passageiro) {
     Passageiro* temp = listaNacionalidades;
     while (temp != nullptr) {
@@ -125,6 +141,13 @@ void inserirPassageiroNaListaNacionalidades(Passageiro*& listaNacionalidades, Pa
 }
 
 
+/**
+ * Insere um passageiro em uma árvore binária de busca ordenada por nome.
+ *
+ * @param no Ponteiro para a raiz da árvore onde o passageiro será inserido.
+ * @param passageiro Ponteiro para o passageiro a ser inserido na árvore.
+ * O passageiro é inserido de acordo com seu primeiro nome, mantendo a ordem alfabética na árvore.
+ */
 void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro) {
     if (no == nullptr) {
         no = passageiro;
@@ -137,6 +160,11 @@ void inserirPassageiroNaArvore(Passageiro*& no, Passageiro* passageiro) {
     }
 }
 
+/**
+ *
+ * @param no Ponteiro para o nó raiz da árvore a ser impressa.
+ * @param nivel Nível de profundidade atual na árvore (começa em 0 para a raiz).
+ */
 void imprimeArvore(Passageiro* no, int nivel) {
     if (no == nullptr) {
         std::cout << std::endl;

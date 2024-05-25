@@ -2,7 +2,13 @@
 #include "utils.h"
 #include "passageiros.h"
 
-
+/**
+ * Cria um novo avião.
+ *
+ * @return Ponteiro para o novo avião criado.
+ * O avião gerado contém um nome de voo aleatório, modelo de avião aleatório, origem aleatória,
+ * destino fixo como "Aeroporto EDA", capacidade aleatória entre 10 e 15 passageiros, e uma lista de passageiros vazia.
+ */
 Aviao* novoAviao(){
     Aviao* elemento = new Aviao;
     elemento->proximoAviao = NULL;
@@ -16,6 +22,15 @@ Aviao* novoAviao(){
     return elemento;
 }
 
+/**
+ * Insere um novo avião na lista de aproximação.
+ *
+ * @param aNodo Ponteiro para o ponteiro do início da ListaAprox.
+ * @param ListaAprox Referência para a ListaAprox.
+ * @return Ponteiro para o início da ListaAprox, incluindo o avião recém-inserido.
+ * Se a lista estava vazia, o avião é inserido como o primeiro elemento e os passageiros são adicionados.
+ * Caso contrário, o avião é inserido no início da lista, mantendo a ordem dos aviões, e os passageiros são adicionados.
+ */
 Aviao* inserirAviaoAprox(Aviao** aNodo, Aviao* &ListaAprox) {
     Aviao *novo = novoAviao();
     if (*aNodo == nullptr) {
@@ -26,7 +41,6 @@ Aviao* inserirAviaoAprox(Aviao** aNodo, Aviao* &ListaAprox) {
     } else {
         novo->proximoAviao = *aNodo;
         *aNodo = novo;
-        // Adicionar passageiros ao avião
         for (int i = 0; i < novo->capacidade; ++i) {
             adicionarPassageiro(novo->proximoPassageiro);
         }
