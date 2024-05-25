@@ -1,8 +1,0 @@
-#ifndef INC_2_EDA_PROJECT_BST_H
-#define INC_2_EDA_PROJECT_BST_H
-
-
-
-
-
-#endif //INC_2_EDA_PROJECT_BST_H

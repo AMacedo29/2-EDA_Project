@@ -22,5 +22,12 @@ int contarPassageiros();
 
 void adicionarPassageiro(Passageiro*& proximoPassageiro);
 
+Passageiro* listaNacionalidades(Passageiro*& passageiro);
+
+Passageiro* removerCopia(Passageiro* raiz, Passageiro* no, Passageiro* ant);
+
+Passageiro* removerCopia(Passageiro* raiz, int num);
+
+
 
 #endif //INC_2_EDA_PROJECT_PASSAGEIROS_H

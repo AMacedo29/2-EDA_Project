@@ -75,4 +75,114 @@ void adicionarPassageiro(Passageiro*& proximoPassageiro) {
     }
 }
 
+Passageiro* listaNacionalidades(Passageiro*& passageiro) {
+    Passageiro* nacionalidades = nullptr;
+    Passageiro* atual = passageiro;
 
+    while (atual != nullptr) {
+        std::string novaNacionalidade = getRandomNacionalidade();
+
+        // Verifica se a nacionalidade já está na lista
+        Passageiro* temp = nacionalidades;
+        bool existe = false;
+        while (temp != nullptr) {
+            if (temp->nacionalidade == novaNacionalidade) {
+                existe = true;
+                break;
+            }
+            temp = temp->next;
+        }
+
+        // Adiciona a nova nacionalidade se não estiver na lista
+        if (!existe) {
+            Passageiro* novo = new Passageiro;
+            novo->nacionalidade = novaNacionalidade;
+            novo->next = nacionalidades;
+            nacionalidades = novo;
+        }
+
+        atual = atual->next;
+    }
+
+    return nacionalidades;
+}
+
+Passageiro* removerCopia(Passageiro* raiz, int num) {
+    Passageiro* no = raiz;
+    Passageiro* ant = NULL;
+    while (no != NULL) {
+        if (num == no->dados) {
+            return removerCopia(raiz, no, ant);
+        }
+        else if (num < no->dados) {
+            ant = no;
+            no = no->esq;
+        }
+        else {
+            ant = no;
+            no = no->dir;
+        }
+    }
+    return nullptr;
+}
+
+Passageiro* removerCopia(Passageiro* raiz, Passageiro* no, Passageiro* ant) {
+    if (ant == NULL) { //remover a raiz
+        if (no->esq == NULL && no->dir == NULL)
+            raiz = NULL;
+        else if (no->esq != NULL && no->dir == NULL)
+            raiz = no->esq;
+        else if (no->esq == NULL && no->dir != NULL)
+            raiz = no->dir;
+        else { //efetuar copia
+            Passageiro* temp = no->esq;
+            ant = raiz;
+            while (temp->dir != NULL) {
+                ant = temp;
+                temp = temp->dir;
+            }
+            swap(temp->valor, raiz->valor);
+            if (ant->valor >= raiz->valor || ant == raiz)
+                ant->esq = temp->esq;
+            else
+                ant->dir = temp->esq;
+            no = temp;
+        }
+    }
+    else { // remover qualquer outro nó
+        if (no->esq == NULL && no->dir == NULL) {
+            if (ant->valor > no->valor)
+                ant->esq = NULL;
+            else
+                ant->dir = NULL;
+        }
+        else if (no->esq == NULL && no->dir != NULL) {
+            if (ant->valor > no->valor)
+                ant->esq = no->dir;
+            else
+                ant->dir = no->dir;
+        }
+        else if (no->esq != NULL && no->dir == NULL) {
+            if (ant->valor > no->valor)
+                ant->esq = no->esq;
+            else
+                ant->dir = no->esq;
+        }
+        else { // efetuar copia
+            Passageiro* temp = no->esq;
+            ant = no;
+            while (temp->dir != NULL) {
+                ant = temp;
+                temp = temp->dir;
+            }
+            swap(temp->valor, no->valor);
+            if (ant->valor > no->valor || ant == no)
+                ant->esq = temp->esq;
+            else
+                ant->dir = temp->esq;
+            no = temp;
+        }
+
+    }
+    return no;
+}
