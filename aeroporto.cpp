@@ -138,7 +138,7 @@ void menuNacionalidades(){
                 mostrarpassageirosordenados(listaPista);
                 break;
             case 'd':
-                pesquisarpassageiro(listaPista);
+                pesquisarpassageiropista(listaPista);
                 break;
             case 'f':
                 std::cout << "(f) - Editar passageiros" << std::endl;
@@ -296,31 +296,35 @@ void mostrarpassageiros(Aviao* listaPista) {
             }
             passageiroAtual = passageiroAtual->next;
         }
-
         std::cout << std::endl;
         listaPista = listaPista->proximoAviao;
         std::cout << std::endl;
     }
 }
 
-void pesquisarpassageiro(Aviao* listaPista){
+void pesquisarpassageiropista(Aviao* listaPista) {
     std::string primNome;
-    std::cout << "Digite o primeiro nome do passageiro" << std::endl;
+    std::cout << "Digite o primeiro nome do passageiro: ";
     std::cin >> primNome;
+    bool encontrado = false;
     while (listaPista != nullptr) {
-
         Passageiro* passageiroAtual = listaPista->proximoPassageiro;
-        while (passageiroAtual != nullptr ) {
-            if (primNome == passageiroAtual->primeiroNome){
-                std::cout << "Passageiro do Voo-> " << listaPista->nomeVoo << std::endl;
+        while (passageiroAtual != nullptr) {
+            if (passageiroAtual->primeiroNome == primNome) {
+                std::cout << "___Passageiro da zona de partida___" << std::endl;
+                std::cout << "Voo: " << listaPista->nomeVoo << std::endl;
                 std::cout << "Numero de Bilhete: " << passageiroAtual->numeroDoBilhete << std::endl;
                 std::cout << "Nome: " << passageiroAtual->primeiroNome << " " << passageiroAtual->segundoNome << std::endl;
                 std::cout << "Nacionalidade: " << passageiroAtual->nacionalidade << std::endl;
                 std::cout << std::endl;
+                encontrado = true;
             }
             passageiroAtual = passageiroAtual->next;
         }
         listaPista = listaPista->proximoAviao;
-        std::cout << std::endl;
+    }
+
+    if (!encontrado) {
+        std::cout << "O passageiro da zona de partida, nao foi encontrado." << std::endl;
     }
 }

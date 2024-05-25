@@ -7,9 +7,11 @@ void aeroportoMenu();
 
 void menuNacionalidades();
 
+
+
 void mostrarpassageirosordenados(Aviao* listaPista);
 
-void pesquisarpassageiro(Aviao* listaPista);
+void pesquisarpassageiropista(Aviao* listaPista);
 
 void mostrarpassageiros(Aviao* listaPista);
 
