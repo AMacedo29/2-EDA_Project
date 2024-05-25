@@ -128,6 +128,7 @@ void menuNacionalidades(){
         std::cout << "(f) - Editar passageiros" << std::endl;
         std::cout << "(b) - Sair" << std::endl;
         std::cin >> escolha;
+        Passageiro* node = construirArvoreBinariaDosPassageiros(listaPista);
         //Converte a escolha para minusculas
         escolha = tolower(escolha);
         switch(escolha){
@@ -135,8 +136,9 @@ void menuNacionalidades(){
                 mostrarpassageiros(listaPista);
                 break;
             case's':
-                mostrarpassageirosordenados(listaPista);
+                imprimirArvoreInOrder(node);
                 break;
+
             case 'd':
                 pesquisarpassageiro(listaPista,ListaAprox);
                 break;
@@ -481,6 +483,56 @@ void editarnacionalidade(Aviao* listaAprox){
         std::cout << "Passageiro nao foi encontrado." << std::endl;
     }
 }
+//BST para Passageiro da Pista
+
+Passageiro* criarNovoPassageiro(const std::string& numeroDoBilhete, const std::string& primeiroNome, const std::string& segundoNome, const std::string& nacionalidade) {
+    Passageiro* novoPassageiro = new Passageiro();
+    novoPassageiro->numeroDoBilhete = numeroDoBilhete;
+    novoPassageiro->primeiroNome = primeiroNome;
+    novoPassageiro->segundoNome = segundoNome;
+    novoPassageiro->nacionalidade = nacionalidade;
+    novoPassageiro->next = nullptr;
+    novoPassageiro->esq = nullptr;
+    novoPassageiro->dir = nullptr;
+    return novoPassageiro;
+}
 
 
+Passageiro* inserirPassageiro(Passageiro* raiz, Passageiro* novoPassageiro) {
+    if (raiz == nullptr) {
+        return novoPassageiro;
+    }
 
+    if (novoPassageiro->primeiroNome < raiz->primeiroNome) {
+        raiz->esq = inserirPassageiro(raiz->esq, novoPassageiro);
+    } else {
+        raiz->dir = inserirPassageiro(raiz->dir, novoPassageiro);
+    }
+
+    return raiz;
+}
+
+Passageiro* construirArvoreBinariaDosPassageiros(Aviao* listaPista) {
+    Passageiro* raiz = nullptr;
+
+    while (listaPista != nullptr) {
+        Passageiro* passageiroAtual = listaPista->proximoPassageiro;
+        while (passageiroAtual != nullptr) {
+            Passageiro* proximo = passageiroAtual->next;
+            passageiroAtual->next = nullptr; // Desconecta o passageiro da lista
+            raiz = inserirPassageiro(raiz, passageiroAtual);
+            passageiroAtual = proximo;
+        }
+        listaPista = listaPista->proximoAviao;
+    }
+
+    return raiz;
+}
+
+void imprimirArvoreInOrder(Passageiro* raiz) {
+    if (raiz != nullptr) {
+        imprimirArvoreInOrder(raiz->esq);
+        std::cout << "Nome: " << raiz->primeiroNome << " " << raiz->segundoNome << ", Nacionalidade: " << raiz->nacionalidade << std::endl;
+        imprimirArvoreInOrder(raiz->dir);
+    }
+}

@@ -2,6 +2,9 @@
 #define INC_2_EDA_PROJECT_AEROPORTO_H
 #include "aviao.h"
 
+void imprimirArvoreInOrder(Passageiro* raiz);
+Passageiro* construirArvoreBinariaDosPassageiros(Aviao* listaPista);
+
 
 void aeroportoMenu();
 
