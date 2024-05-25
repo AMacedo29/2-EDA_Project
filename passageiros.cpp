@@ -107,6 +107,7 @@ Passageiro* listaNacionalidades(Passageiro*& passageiro) {
     return nacionalidades;
 }
 
+/*
 Passageiro* removerCopia(Passageiro* raiz, int num) {
     Passageiro* no = raiz;
     Passageiro* ant = NULL;
@@ -186,3 +187,4 @@ Passageiro* removerCopia(Passageiro* raiz, Passageiro* no, Passageiro* ant) {
     }
     return no;
 }
+*/
