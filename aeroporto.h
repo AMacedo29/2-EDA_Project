@@ -7,7 +7,7 @@ void aeroportoMenu();
 
 void menuNacionalidades();
 
-
+void editarnacionalidade(Aviao* listaAprox);
 
 void mostrarpassageirosordenados(Aviao* listaPista);
 

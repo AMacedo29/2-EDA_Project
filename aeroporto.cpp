@@ -141,7 +141,7 @@ void menuNacionalidades(){
                 pesquisarpassageiro(listaPista,ListaAprox);
                 break;
             case 'f':
-                std::cout << "(f) - Editar passageiros" << std::endl;
+                editarnacionalidade(ListaAprox);
                 break;
             case 'b':
                 std::cout << "Escolheu a opcao Sair. Adeus!" << std::endl;
@@ -349,3 +349,38 @@ void pesquisarpassageiro(Aviao* listaPista, Aviao* listaAprox) {
     }
 
 }
+
+
+void editarnacionalidade(Aviao* listaAprox){
+    std::string numerovoo;
+    std::string primNome;
+    std::string novaNacionalidade;
+    bool encontrado = false;
+    std::cout << "Digite o numero de voo" << std::endl;
+    std::cin >> numerovoo;
+    std::cout << "Digite o primeiro nome do passageiro"<< std::endl;
+    std::cin >> primNome;
+
+    while (listaAprox != nullptr){
+        Passageiro* passageirochegada = listaAprox->proximoPassageiro;
+        while (passageirochegada != nullptr){
+            if(passageirochegada->primeiroNome == primNome && listaAprox->nomeVoo == numerovoo){
+                std::cout << "Insira a nova nacionalidade para" << passageirochegada->primeiroNome << " " << passageirochegada->segundoNome << ":" << std::endl;
+                std::cin >> novaNacionalidade;
+                passageirochegada->nacionalidade = novaNacionalidade;
+                std::cout << "Nacionalidade de passageiro Atualizado com sucesso!" << std::endl;
+                encontrado = true;
+                break;
+            }
+            passageirochegada = passageirochegada->next;
+        }
+        listaAprox = listaAprox->proximoAviao;
+    }
+    if(!encontrado){
+        std::cout << "Passageiro nao foi encontrado." << std::endl;
+    }
+
+}
+
+
+
