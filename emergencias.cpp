@@ -130,20 +130,24 @@ void pousoDeEmergencia(){
     } else { // se não tiver espaço suficiente na listaPista
         std::string VooPista;
         std::string ModeloPista;
-        std::cout << "Digite o Voo a ser movido da Pista para Partida: " << std::endl;
+        std::cout << "Digite o Voo a ser movido da Pista: ";
         std::cin >> VooPista;
-        std::cout << "Digite o Modelo a ser movido da Pista para Partida: " << std::endl;
+        converterParaMaiusculas(VooPista);
+        std::cout << "Digite o Modelo do aviao Pista: ";
         std::cin >> ModeloPista;
+        converterParaMaiusculas(ModeloPista);
         moverAviao(&listaPista, &listaPartida, VooPista, ModeloPista);
         moverAviaoEmergencia(&ListaAprox, &listaPista, "Aeroporto EDA Emergencia");
     }
     if (countAvioes(listaPartida) >=5){
         std::string nomeVoo;
         std::string modeloAviao;
-        std::cout << "Digite o Voo a ser movido da Partida: " << std::endl;
+        std::cout << "Digite o Voo a ser movido da Partida: ";
         std::cin >> nomeVoo;
-        std::cout << "Digite o Modelo a ser movido da Partida" << std::endl;
+        converterParaMaiusculas(nomeVoo);
+        std::cout << "Digite o Modelo a ser movido da Partida: ";
         std::cin >> modeloAviao;
+        converterParaMaiusculas(modeloAviao);
         removerAviao(&listaPartida,nomeVoo,modeloAviao);
     }
     // Atualizar origem e destino do avião de emergência na listaPista

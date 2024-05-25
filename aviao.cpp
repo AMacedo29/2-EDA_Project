@@ -85,26 +85,39 @@ Aviao* inserirAviaoAproxEmergencia(Aviao** aNodo, Aviao* &ListaAprox) {
  * @param nomeVoo Nome do voo do aviao a ser movido.
  * @param modeloAviao Modelo do aviao a ser movido.
  */
-void moverAviao(Aviao** listaDeOrigem, Aviao** listaDeDestino, const std::string& nomeVoo, const std::string& modeloAviao) {
+void moverAviao(Aviao** listaDeOrigem, Aviao** listaDeDestino, std::string& nomeVoo, std::string& modeloAviao) {
     Aviao* anterior = nullptr;
     Aviao* atual = *listaDeOrigem;
+    bool encontrado = false;
 
-    while (atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)){
-        anterior = atual;
-        atual = atual->proximoAviao;
-    }
-    if (atual){
-        if (anterior){
-            anterior -> proximoAviao = atual -> proximoAviao;
-        }else{
-            *listaDeOrigem = atual -> proximoAviao;
+    do {
+        anterior = nullptr;
+        atual = *listaDeOrigem;
+        while (atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)) {
+            anterior = atual;
+            atual = atual->proximoAviao;
         }
+        if (atual) {
+            if (anterior) {
+                anterior->proximoAviao = atual->proximoAviao;
+            } else {
+                *listaDeOrigem = atual->proximoAviao;
+            }
 
-        atual -> proximoAviao = *listaDeDestino;
-        *listaDeDestino = atual;
-    } else{
-        std::cout << "O aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " nao foi encontrado na lista." << std::endl;
-    }
+            atual->proximoAviao = *listaDeDestino;
+            *listaDeDestino = atual;
+            encontrado = true;
+        } else {
+            std::cout << "\nO aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " nao foi encontrado na lista." << std::endl;
+            std::cout << "Por favor, insira novamente os dados do aviao." << std::endl;
+            std::cout << "Digite o Voo a ser movido (Pista): ";
+            std::cin >> nomeVoo;
+            converterParaMaiusculas(nomeVoo);
+            std::cout << "Digite o Modelo do aviao a ser movido (Pista): ";
+            std::cin >> modeloAviao;
+            converterParaMaiusculas(modeloAviao);
+        }
+    } while (!encontrado);
 }
 
 
@@ -115,25 +128,23 @@ void moverAviao(Aviao** listaDeOrigem, Aviao** listaDeDestino, const std::string
  * @param listaDeDestino Ponteiro para o ponteiro da lista para onde o aviao será movido.
  * @param emergencia É o destino do aviao de emergencia
  */
-void moverAviaoEmergencia(Aviao** listaDeOrigem, Aviao** listaDeDestino ,const std::string& emergencia){
+void moverAviaoEmergencia(Aviao** listaDeOrigem, Aviao** listaDeDestino, const std::string& emergencia){
     Aviao* anterior = nullptr;
     Aviao* atual = *listaDeOrigem;
 
-    while (atual && !(atual->destino == emergencia)){
+    while(atual && !(atual->destino == emergencia)){
         anterior = atual;
         atual = atual->proximoAviao;
     }
     if (atual){
         if (anterior){
-            anterior -> proximoAviao = atual -> proximoAviao;
+            anterior->proximoAviao = atual->proximoAviao;
         }else{
-            *listaDeOrigem = atual -> proximoAviao;
+            *listaDeOrigem = atual->proximoAviao;
         }
 
         atual -> proximoAviao = *listaDeDestino;
         *listaDeDestino = atual;
-    } else{
-        std::cout << "O aviao com o destino " << emergencia <<" nao foi encontrado na lista." << std::endl;
     }
 }
 
@@ -144,22 +155,50 @@ void moverAviaoEmergencia(Aviao** listaDeOrigem, Aviao** listaDeDestino ,const s
  * @param nomeVoo Nome do voo do aviao a ser removido.
  * @param modeloAviao Modelo do aviao a ser removido.
  */
-void removerAviao(Aviao** lista, const std::string& nomeVoo, const std::string& modeloAviao) {
+void removerAviao(Aviao** lista, std::string& nomeVoo, std::string& modeloAviao) {
     Aviao* anterior = nullptr;
     Aviao* atual = *lista;
+    bool encontrado = false;
 
-    while (atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)) {
-        anterior = atual;
-        atual = atual->proximoAviao;
-    }
-    if (atual) {
-        if (anterior) {
-            anterior->proximoAviao = atual->proximoAviao;
-        } else {
-            *lista = atual->proximoAviao;
+    do{
+        anterior = nullptr;
+        atual = *lista;
+
+        while(atual && !(atual->nomeVoo == nomeVoo && atual->modeloAviao == modeloAviao)){
+            anterior = atual;
+            atual = atual->proximoAviao;
         }
-        delete atual;
-    } else {
-        std::cout << "Avião com voo " << nomeVoo << " e modelo " << modeloAviao << " não encontrado na lista." << std::endl;
+
+        if (atual){
+            if (anterior){
+                anterior->proximoAviao = atual->proximoAviao;
+            }else{
+                *lista = atual->proximoAviao;
+            }
+            delete atual;
+            std::cout << "O aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " foi removido da lista." << std::endl;
+            encontrado = true;
+        }else{
+            std::cout << "\nO aviao com o voo " << nomeVoo << " e o modelo " << modeloAviao << " nao foi encontrado na lista." << std::endl;
+            std::cout << "Por favor, insira novamente os dados do aviao." << std::endl;
+            std::cout << "Digite o Voo a ser removido (Partida): ";
+            std::cin >> nomeVoo;
+            converterParaMaiusculas(nomeVoo);
+            std::cout << "Digite o Modelo do aviao a ser removido (Partida): ";
+            std::cin >> modeloAviao;
+            converterParaMaiusculas(modeloAviao);
+        }
+    }while(!encontrado);
+}
+
+
+/**
+ * Serve para converter uma string para letras maiusculas.
+ *
+ * @param str É a string a ser convertida para letras maiusculas.
+ */
+void converterParaMaiusculas(std::string& str){
+    for(char& caractere : str){
+        caractere = std::toupper(caractere);
     }
 }

@@ -25,10 +25,12 @@ Aviao* novoAviaoEmergencia();
 
 Aviao* inserirAviaoAproxEmergencia(Aviao** aNodo, Aviao* &ListaAprox);
 
-void moverAviao(Aviao** origem, Aviao** destino, const std::string& nomeVoo, const std::string& modeloAviao);
+void moverAviao(Aviao** origem, Aviao** destino,  std::string& nomeVoo,  std::string& modeloAviao);
 
-void removerAviao(Aviao** lista, const std::string& nomeVoo, const std::string& modeloAviao);
+void removerAviao(Aviao** lista,  std::string& nomeVoo,  std::string& modeloAviao);
 
 void moverAviaoEmergencia(Aviao** origem, Aviao** destino ,const std::string& emergencia);
+
+void converterParaMaiusculas(std::string& str);
 
 #endif //INC_2_EDA_PROJECT_AVIAO_H
