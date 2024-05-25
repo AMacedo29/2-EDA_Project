@@ -350,22 +350,123 @@ void pesquisarpassageiro(Aviao* listaPista, Aviao* listaAprox) {
 
 }
 
+void mostrarPassageiroVoo(Aviao* listaAprox, std::string numVoo) {
+    // Itera sobre a lista de aviões
+    while (listaAprox != nullptr) {
+        // Verifica se o número do voo corresponde ao número fornecido
+        if (listaAprox->nomeVoo == numVoo) {
+            std::cout << "Passageiros do Voo " << " (" << listaAprox->nomeVoo << "):" << std::endl;
+
+            // Itera sobre a lista de passageiros do voo encontrado
+            Passageiro* passageiroAtual = listaAprox->proximoPassageiro;
+            while (passageiroAtual != nullptr) {
+                std::cout << "Primeiro Nome: " << passageiroAtual->primeiroNome << std::endl;
+                std::cout << "Segundo Nome: " << passageiroAtual->segundoNome << std::endl;
+                std::cout << "Numero de Bilhete: " << passageiroAtual->numeroDoBilhete << std::endl;
+                std::cout << "Nacionalidade: " << passageiroAtual->nacionalidade << std::endl;
+                std::cout << std::endl;
+                passageiroAtual = passageiroAtual->next;
+            }
+            return; // Saímos da função após encontrar e mostrar o voo
+        }
+        listaAprox = listaAprox->proximoAviao;
+    }
+
+    std::cout << "Voo com número " << numVoo << " não foi encontrado." << std::endl;
+}
+
+bool validarNumeroVoo(Aviao* listaAprox, std::string numVoo){
+    while (listaAprox != nullptr){
+        if(listaAprox->nomeVoo == numVoo){
+            return true;
+        }
+        listaAprox = listaAprox -> proximoAviao;
+    }
+    return false;
+}
+
+bool validarprimNome(Aviao* listaAprox, std::string& primNome, std::string& nomeVoo) {
+
+    while (listaAprox != nullptr) {
+
+        if (listaAprox->nomeVoo == nomeVoo) {
+            Passageiro* passageiroAtual = listaAprox->proximoPassageiro;
+
+            while (passageiroAtual != nullptr) {
+
+                if (passageiroAtual->primeiroNome == primNome) {
+                    return true;
+                }
+                passageiroAtual = passageiroAtual->next;
+            }
+            return false;
+        }
+        listaAprox = listaAprox->proximoAviao;
+    }
+    return false;
+}
+
+bool validarsegNome(Aviao* listaAprox, std::string& segNome, std::string& nomeVoo) {
+
+    while (listaAprox != nullptr) {
+
+        if (listaAprox->nomeVoo == nomeVoo) {
+            Passageiro* passageiroAtual = listaAprox->proximoPassageiro;
+
+            while (passageiroAtual != nullptr) {
+
+                if (passageiroAtual->segundoNome == segNome) {
+                    return true;
+                }
+                passageiroAtual = passageiroAtual->next;
+            }
+            return false;
+        }
+        listaAprox = listaAprox->proximoAviao;
+    }
+    return false;
+}
+
+
 
 void editarnacionalidade(Aviao* listaAprox){
     std::string numerovoo;
     std::string primNome;
+    std::string segNome;
     std::string novaNacionalidade;
     bool encontrado = false;
-    std::cout << "Digite o numero de voo" << std::endl;
-    std::cin >> numerovoo;
-    std::cout << "Digite o primeiro nome do passageiro"<< std::endl;
-    std::cin >> primNome;
+
+    do {
+        std::cout << "Digite o numero de voo" << std::endl;
+        std::cin >> numerovoo;
+        if(validarNumeroVoo(listaAprox, numerovoo)){
+            std::cout << "Voo foi encontrado" << std::endl;
+        }
+    } while (!validarNumeroVoo(listaAprox,numerovoo));
+    //Mostra os dados de todos os passagiros do voo que foi inserido;
+    mostrarPassageiroVoo(listaAprox, numerovoo);
+
+    do {
+        std::cout << "Digite o primeiro nome do passageiro"<< std::endl;
+        std::cin >> primNome;
+        if(validarprimNome(listaAprox, primNome, numerovoo)){
+            std::cout << "O primeiro nome foi encontrado" << std::endl;
+        }
+    } while (!validarprimNome(listaAprox,primNome,numerovoo));
+
+    do {
+        std::cout << "Digite o segundo nome do passageiro"<< std::endl;
+        std::cin >> segNome;
+        if(validarprimNome(listaAprox, segNome, numerovoo)){
+            std::cout << "O primeiro nome foi encontrado" << std::endl;
+        }
+    } while (!validarsegNome(listaAprox,segNome,numerovoo));
 
     while (listaAprox != nullptr){
         Passageiro* passageirochegada = listaAprox->proximoPassageiro;
         while (passageirochegada != nullptr){
             if(passageirochegada->primeiroNome == primNome && listaAprox->nomeVoo == numerovoo){
-                std::cout << "Insira a nova nacionalidade para" << passageirochegada->primeiroNome << " " << passageirochegada->segundoNome << ":" << std::endl;
+                std::cout << "Insira a nova nacionalidade para " << passageirochegada->primeiroNome << " " << passageirochegada->segundoNome << ":" << std::endl;
                 std::cin >> novaNacionalidade;
                 passageirochegada->nacionalidade = novaNacionalidade;
                 std::cout << "Nacionalidade de passageiro Atualizado com sucesso!" << std::endl;
@@ -379,7 +480,6 @@ void editarnacionalidade(Aviao* listaAprox){
     if(!encontrado){
         std::cout << "Passageiro nao foi encontrado." << std::endl;
     }
-
 }
 
 

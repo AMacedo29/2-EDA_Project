@@ -7,6 +7,12 @@ void aeroportoMenu();
 
 void menuNacionalidades();
 
+void mostrarPassageiroVoo(Aviao* listaAprox, std::string numVoo);
+
+bool validarprimNome(Aviao* listaAprox, std::string& primNome, std::string& nomeVoo);
+
+bool validarsegNome(Aviao* listaAprox, std::string& segNome, std::string& nomeVoo);
+
 void editarnacionalidade(Aviao* listaAprox);
 
 void mostrarpassageirosordenados(Aviao* listaPista);
